@@ -1,6 +1,10 @@
 package html
 
-import "testing"
+import (
+	"bytes"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 var kitchenSinkTestCases = []HTMLTestCase{
 	{
@@ -89,9 +93,12 @@ func Test_KitchenSink(t *testing.T) {
 		),
 	}
 
-	output := ""
+	buf := new(bytes.Buffer)
 	for _, el := range page {
-		output += el.Render()
+
+		_, err := el.Render(buf)
+		assert.NoError(t, err, "Rendering")
+
 	}
-	t.Log(output)
+	t.Log(buf.String())
 }

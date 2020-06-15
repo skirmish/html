@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type unorderedlist struct {
 	Element
 	Children []HtmlElement
@@ -12,16 +14,9 @@ func Ul(attrs ...func(HtmlElement)) HtmlElement {
 	}
 	return ul
 }
-func (u *unorderedlist) Render() string {
-	output := "<ul"
-	u.InitAttributes()
-	output += u.Element.RenderAttr()
-	output += ">"
-	for _, child := range u.Children {
-		output += child.Render()
-	}
-	output += "</ul>"
-	return output
+
+func (u *unorderedlist) Render(w io.Writer) (int, error) {
+	return u.Element.Render(w, "ul", u.Children)
 }
 
 func (u *unorderedlist) AddElements(elements ...HtmlElement) HtmlElement {

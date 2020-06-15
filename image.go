@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type image struct {
 	Element
 	Children []HtmlElement
@@ -13,14 +15,8 @@ func Img(attrs ...func(HtmlElement)) HtmlElement {
 	return i
 }
 
-func (i *image) Render() string {
-	output := "<img"
-	output += i.Element.RenderAttr()
-	//for _,child := range l.Children {
-	//	output += child.Render()
-	//}
-	output += "/>"
-	return output
+func (a *image) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "img", a.Children)
 }
 
 func (i *image) AddElements(elements ...HtmlElement) HtmlElement {

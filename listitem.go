@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type listitem struct {
 	Element
 	Children []HtmlElement
@@ -12,16 +14,8 @@ func Li(attrs ...func(HtmlElement)) HtmlElement {
 	}
 	return li
 }
-func (l *listitem) Render() string {
-	output := "<li"
-	l.InitAttributes()
-	output += l.Element.RenderAttr()
-	output += ">"
-	for _, child := range l.Children {
-		output += child.Render()
-	}
-	output += "</li>"
-	return output
+func (l *listitem) Render(w io.Writer) (int, error) {
+	return l.Element.Render(w, "li", l.Children)
 }
 
 func (l *listitem) AddElements(elements ...HtmlElement) HtmlElement {

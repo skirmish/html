@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type script struct {
 	Element
 	Children []HtmlElement
@@ -13,13 +15,8 @@ func Script(attrs ...func(HtmlElement)) HtmlElement {
 	return s
 }
 
-func (s *script) Render() string {
-	output := "<script>"
-	for _, child := range s.Children {
-		output += child.Render()
-	}
-	output += "</script>\n"
-	return output
+func (a *script) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "script", a.Children)
 }
 
 func (s *script) AddElements(elements ...HtmlElement) HtmlElement {
