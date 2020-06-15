@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type meta struct {
 	Element
 	KeyVals []KeyVal
@@ -22,18 +24,8 @@ func Key(key string, value string) func(*meta) {
 	}
 }
 
-func (m *meta) Render() string {
-	output := "<meta"
-	m.InitAttributes()
-	for _, kv := range m.KeyVals {
-		m.Element.AddAttribute(kv.Key, kv.Value)
-	}
-	//if m.Charset!="" {
-	//	m.Element.AddAttribute("charset",m.Charset)
-	//}
-	output += m.Element.RenderAttr()
-	output += "/>"
-	return output
+func (a *meta) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "meta", nil)
 }
 
 func (m *meta) AddElements(elements ...HtmlElement) HtmlElement {

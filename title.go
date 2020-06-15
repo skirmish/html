@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type title struct {
 	Element
 	Children []HtmlElement
@@ -13,13 +15,8 @@ func Title(attrs ...func(HtmlElement)) HtmlElement {
 	return t
 }
 
-func (t *title) Render() string {
-	output := "<title>"
-	for _, el := range t.Children {
-		output += el.Render()
-	}
-	output += "</title>"
-	return output
+func (a *title) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "title", a.Children)
 }
 
 func (t *title) AddElements(elements ...HtmlElement) HtmlElement {

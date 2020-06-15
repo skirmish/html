@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type meter struct {
 	Element
 	Children []HtmlElement
@@ -12,16 +14,9 @@ func Meter(attrs ...func(HtmlElement)) HtmlElement {
 	}
 	return ul
 }
-func (u *meter) Render() string {
-	output := "<meter"
-	u.InitAttributes()
-	output += u.Element.RenderAttr()
-	output += ">"
-	for _, child := range u.Children {
-		output += child.Render()
-	}
-	output += "</meter>"
-	return output
+
+func (a *meter) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "meter", a.Children)
 }
 
 func (u *meter) AddElements(elements ...HtmlElement) HtmlElement {

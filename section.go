@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type section struct {
 	Element
 	Children []HtmlElement
@@ -12,16 +14,9 @@ func Section(attrs ...func(HtmlElement)) HtmlElement {
 	}
 	return ul
 }
-func (u *section) Render() string {
-	output := "<section"
-	u.InitAttributes()
-	output += u.Element.RenderAttr()
-	output += ">"
-	for _, child := range u.Children {
-		output += child.Render()
-	}
-	output += "</section>"
-	return output
+
+func (a *section) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "section", a.Children)
 }
 
 func (u *section) AddElements(elements ...HtmlElement) HtmlElement {

@@ -1,6 +1,7 @@
 package html
 
 import (
+	"bytes"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -8,7 +9,7 @@ import (
 var sectionTestCases = []HTMLTestCase{
 	{
 		name:    "section",
-		output:  "<section></section>",
+		output:  "<section/>",
 		element: Section(),
 	},
 }
@@ -17,7 +18,9 @@ func Test_SectionGeneration(t *testing.T) {
 	for _, testCase := range sectionTestCases {
 		t.Logf("Test %s", testCase.name)
 
-		output := testCase.element.Render()
-		assert.Equal(t, testCase.output, output)
+		buf := new(bytes.Buffer)
+		_, err := testCase.element.Render(buf)
+		assert.NoError(t, err, "Rendering")
+		assert.Equal(t, testCase.output, buf.String())
 	}
 }

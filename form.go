@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type form struct {
 	Element
 	Children []HtmlElement
@@ -13,25 +15,8 @@ func Form(attrs ...func(HtmlElement)) HtmlElement {
 	return f
 }
 
-func (f *form) Render() string {
-	f.Element.InitAttributes()
-	output := "<form"
-	if f.Id != "" {
-		f.AddAttribute("ID", f.Id)
-	}
-	if f.Name != "" {
-		f.AddAttribute("name", f.Name)
-	}
-	output += f.Element.RenderAttr() // Attributes
-	output += ">"
-
-	for _, child := range f.Children {
-		output += child.Render()
-	}
-
-	// Render end
-	output += "</form>"
-	return output
+func (a *form) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "form", a.Children)
 }
 
 func (f *form) AddElements(elements ...HtmlElement) HtmlElement {

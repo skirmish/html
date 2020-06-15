@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type style struct {
 	Element
 	Children []HtmlElement
@@ -13,13 +15,8 @@ func Style(attrs ...func(HtmlElement)) HtmlElement {
 	return s
 }
 
-func (s *style) Render() string {
-	output := "<style>"
-	for _, child := range s.Children {
-		output += child.Render()
-	}
-	output += "</style>"
-	return output
+func (a *style) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "style", a.Children)
 }
 
 func (s *style) AddElements(elements ...HtmlElement) HtmlElement {

@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type paragraph struct {
 	Element
 	Children []HtmlElement
@@ -13,16 +15,8 @@ func P(attrs ...func(HtmlElement)) HtmlElement {
 	return p
 }
 
-func (p *paragraph) Render() string {
-	output := "<p"
-	p.InitAttributes()
-	output += p.Element.RenderAttr()
-	output += ">"
-	for _, child := range p.Children {
-		output += child.Render()
-	}
-	output += "</p>"
-	return output
+func (a *paragraph) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "p", a.Children)
 }
 
 func (p *paragraph) AddElements(elements ...HtmlElement) HtmlElement {

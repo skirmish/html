@@ -1,6 +1,9 @@
 package html
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+)
 
 type heading struct {
 	Element
@@ -22,14 +25,8 @@ func Level(level int) func(*heading) {
 	}
 }
 
-func (h *heading) Render() string {
-	output := ""
-	output += fmt.Sprintf("<h%d>", h.Level)
-	for _, el := range h.Children {
-		output += el.Render()
-	}
-	output += fmt.Sprintf("</h%d>", h.Level)
-	return output
+func (a *heading) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, fmt.Sprintf("h%d", a.Level), a.Children)
 }
 
 func (h *heading) AddElements(elements ...HtmlElement) HtmlElement {

@@ -1,5 +1,7 @@
 package html
 
+import "io"
+
 type head struct {
 	Element
 	Children []HtmlElement
@@ -13,13 +15,8 @@ func Head(attrs ...func(HtmlElement)) HtmlElement {
 	return h
 }
 
-func (h *head) Render() string {
-	output := "<head>"
-	for _, child := range h.Children {
-		output += child.Render()
-	}
-	output += "</head>\n"
-	return output
+func (a *head) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "head", a.Children)
 }
 
 func (h *head) AddElements(elements ...HtmlElement) HtmlElement {

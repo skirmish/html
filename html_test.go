@@ -1,6 +1,7 @@
 package html
 
 import (
+	"bytes"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -19,32 +20,32 @@ var htmlTestCases = []HTMLTestCase{
 	},
 	{
 		name:    "html",
-		output:  "<html>\n</html>\n",
+		output:  "<html/>",
 		element: Html(),
 	},
 	{
 		name:    "html lang=en",
-		output:  "<html lang=\"en\">\n</html>\n",
+		output:  "<html lang=\"en\"/>",
 		element: Html(Lang("en")),
 	},
 	{
 		name:    "form",
-		output:  "<form></form>",
+		output:  "<form/>",
 		element: Form(),
 	},
 	{
 		name:    "form with id",
-		output:  "<form id=\"formId1\"></form>",
+		output:  "<form id=\"formId1\"/>",
 		element: Form(Id("formId1")),
 	},
 	{
 		name:    "form with id,name",
-		output:  "<form id=\"formId1\" name=\"somename\"></form>",
+		output:  "<form id=\"formId1\" name=\"somename\"/>",
 		element: Form(Id("formId1"), Name("somename")),
 	},
 	{
 		name:    "Page with head and body",
-		output:  "<html>\n<head></head>\n<body></body></html>\n",
+		output:  "<html><head/><body/></html>",
 		element: Html().AddElements(Head(), Body()),
 	},
 	{
@@ -59,7 +60,7 @@ var htmlTestCases = []HTMLTestCase{
 	},
 	{
 		name:    "script",
-		output:  "<script></script>\n",
+		output:  "<script/>",
 		element: Script(),
 	},
 }
@@ -68,8 +69,10 @@ func Test_HtmlGeneration(t *testing.T) {
 	for _, testCase := range htmlTestCases {
 		t.Logf("Test %s", testCase.name)
 
-		output := testCase.element.Render()
-		assert.Equal(t, testCase.output, output)
+		buf := new(bytes.Buffer)
+		_, err := testCase.element.Render(buf)
+		assert.NoError(t, err, "Rendering")
+		assert.Equal(t, testCase.output, buf.String())
 	}
 }
 
@@ -78,16 +81,20 @@ func runBenchmarkCases(b *testing.B, cases []HTMLTestCase) {
 		b.Run(benchCase.name, func(b *testing.B) {
 			b.ReportAllocs()
 			for i := 0; i < b.N; i++ {
-				output := benchCase.element.Render()
-				b.ReportMetric(float64(len(output)), "bytes")
+				buf := new(bytes.Buffer)
+				n, _ := benchCase.element.Render(buf)
+				b.ReportMetric(float64(n), "bytes")
 			}
 		})
 	}
 }
+
 func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, htmlTestCases)
 	runBenchmarkCases(b, sectionTestCases)
 	runBenchmarkCases(b, headingTestCases)
 	runBenchmarkCases(b, meterTestCases)
-	//runBenchmarkCases(b,kitchenSinkTestCases)
+	runBenchmarkCases(b, articleTestCases)
+	runBenchmarkCases(b, asideTestCases)
+	//runBenchmarkCases(b, kitchenSinkTestCases)
 }
