@@ -22,6 +22,14 @@ type KeyVal struct {
 	Value string
 }
 
+func (kv *KeyVal) GetRenderSize() int {
+	size := 3 // account for =""
+	size += len(kv.Key)
+	size += len(kv.Value)
+	// key="value"
+	return size
+}
+
 type Element struct {
 	attributes []KeyVal
 }
@@ -132,4 +140,13 @@ func (a *Element) Render(w io.Writer, tag string, children []HtmlElement) (int, 
 	}
 	n += o
 	return n, err
+}
+
+func (e *Element) GetRenderSize() int {
+	size := 1 // account for :space:
+	size += len(e.attributes) - 1
+	for _, el := range e.attributes {
+		size += el.GetRenderSize()
+	}
+	return size
 }

@@ -4,24 +4,14 @@ import "io"
 
 type meta struct {
 	Element
-	KeyVals []KeyVal
 }
 
-func Meta(attrs ...func(*meta)) HtmlElement {
+func Meta(attrs ...func(HtmlElement)) HtmlElement {
 	m := &meta{}
 	for _, attr := range attrs {
 		attr(m)
 	}
 	return m
-}
-
-func Key(key string, value string) func(*meta) {
-	return func(m *meta) {
-		m.KeyVals = append(m.KeyVals, KeyVal{
-			Key:   key,
-			Value: value,
-		})
-	}
 }
 
 func (a *meta) Render(w io.Writer) (int, error) {

@@ -50,6 +50,8 @@ Elements currently supported (absolute bare minimum):
  * a
  * ul
  * li
+ * div
+ * span
  
 
 Notes:

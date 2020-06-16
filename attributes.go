@@ -36,6 +36,13 @@ func Src(source string) func(HtmlElement) {
 	}
 }
 
+// Charset - for meta
+func Charset(charset string) func(HtmlElement) {
+	return func(m HtmlElement) {
+		m.addAttribute("charset", charset)
+	}
+}
+
 //Global Attributes
 ////accesskey	Specifies a shortcut key to activate/focus an element
 ////class	Specifies one or more classnames for an element (refers to a class in a style sheet)

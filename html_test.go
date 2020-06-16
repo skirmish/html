@@ -84,6 +84,7 @@ func runBenchmarkCases(b *testing.B, cases []HTMLTestCase) {
 				buf := new(bytes.Buffer)
 				n, _ := benchCase.element.Render(buf)
 				b.ReportMetric(float64(n), "bytes")
+				b.SetBytes(int64(n))
 			}
 		})
 	}
@@ -96,5 +97,9 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, meterTestCases)
 	runBenchmarkCases(b, articleTestCases)
 	runBenchmarkCases(b, asideTestCases)
-	//runBenchmarkCases(b, kitchenSinkTestCases)
+	runBenchmarkCases(b, divspanTestCases)
+	runBenchmarkCases(b, brTestCases)
+	runBenchmarkCases(b, canvasTestCases)
+	runBenchmarkCases(b, definitionTestCases)
+	runBenchmarkCases(b, kitchenSinkTestCases)
 }
