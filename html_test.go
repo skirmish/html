@@ -92,11 +92,9 @@ func runBenchmarkCases(b *testing.B, cases []HTMLTestCase) {
 
 func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, htmlTestCases)
-	runBenchmarkCases(b, sectionTestCases)
 	runBenchmarkCases(b, headingTestCases)
 	runBenchmarkCases(b, meterTestCases)
-	runBenchmarkCases(b, articleTestCases)
-	runBenchmarkCases(b, asideTestCases)
+	runBenchmarkCases(b, headerfooterTestCases)
 	runBenchmarkCases(b, divspanTestCases)
 	runBenchmarkCases(b, brTestCases)
 	runBenchmarkCases(b, canvasTestCases)
