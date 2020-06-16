@@ -22,5 +22,5 @@ func (c *content) AddElements(elements ...HtmlElement) HtmlElement {
 }
 
 func (c *content) addAttribute(key string, val string) {
-	c.Element.AddAttribute(key, val)
+	//c.Element.AddAttribute(key, val)
 }

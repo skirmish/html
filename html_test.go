@@ -29,6 +29,21 @@ var htmlTestCases = []HTMLTestCase{
 		element: Html(Lang("en")),
 	},
 	{
+		name:    "body",
+		output:  "<body/>",
+		element: Body(),
+	},
+	{
+		name:    "body with class",
+		output:  "<body class=\"name\"/>",
+		element: Body(Class("name")),
+	},
+	{
+		name:    "body with class and content",
+		output:  "<body class=\"name\">content</body>",
+		element: Body(Class("name")).AddElements(Content("content")),
+	},
+	{
 		name:    "form",
 		output:  "<form/>",
 		element: Form(),
@@ -42,6 +57,23 @@ var htmlTestCases = []HTMLTestCase{
 		name:    "form with id,name",
 		output:  "<form id=\"formId1\" name=\"somename\"/>",
 		element: Form(Id("formId1"), Name("somename")),
+	},
+	{
+		name:    "fieldset",
+		output:  "<fieldset/>",
+		element: Fieldset(),
+	},
+	{
+		name:    "fieldset with formid",
+		output:  "<fieldset form=\"someform\"/>",
+		element: Fieldset(FormId("someform")),
+	},
+	{
+		name:   "form with fieldset with formid",
+		output: "<form><fieldset form=\"someform\"/></form>",
+		element: Form().AddElements(
+			Fieldset(FormId("someform")),
+		),
 	},
 	{
 		name:    "Page with head and body",
@@ -62,6 +94,36 @@ var htmlTestCases = []HTMLTestCase{
 		name:    "script",
 		output:  "<script/>",
 		element: Script(),
+	},
+	{
+		name:    "script with type and content",
+		output:  "<script type=\"text/javascript\">alert(1);\n</script>",
+		element: Script(Type("text/javascript")).AddElements(Content("alert(1);\n")),
+	},
+	{
+		name:    "p",
+		output:  "<p/>",
+		element: P(),
+	},
+	{
+		name:    "p with content",
+		output:  "<p>content</p>",
+		element: P().AddElements(Content("content")),
+	},
+	{
+		name:    "p with class and content",
+		output:  "<p class=\"name\">content</p>",
+		element: P(Class("name")).AddElements(Content("content")),
+	},
+	{
+		name:    "style with content",
+		output:  "<style>content</style>",
+		element: Style().AddElements(Content("content")),
+	},
+	{
+		name:    "style with type content",
+		output:  "<style type=\"text/css\">content</style>",
+		element: Style(Type("text/css")).AddElements(Content("content")),
 	},
 }
 
@@ -99,5 +161,6 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, brTestCases)
 	runBenchmarkCases(b, canvasTestCases)
 	runBenchmarkCases(b, listTestCases)
+	runBenchmarkCases(b, tableTestCases)
 	runBenchmarkCases(b, kitchenSinkTestCases)
 }
