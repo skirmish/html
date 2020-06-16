@@ -100,6 +100,6 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, divspanTestCases)
 	runBenchmarkCases(b, brTestCases)
 	runBenchmarkCases(b, canvasTestCases)
-	runBenchmarkCases(b, definitionTestCases)
+	runBenchmarkCases(b, listTestCases)
 	runBenchmarkCases(b, kitchenSinkTestCases)
 }

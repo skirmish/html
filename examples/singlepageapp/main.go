@@ -19,7 +19,9 @@ var page = []html.HtmlElement{
 			html.Title().AddElements(html.Content("Page Title")),
 			html.Style().AddElements(html.Content(
 				"body {margin: 10px 15px 20px 30px; "+
-					"font-family: Impact, Charcoal, sans-serif;}\n"+
+					"font-family: Impact, Charcoal, sans-serif; padding-top: 60px;}\n"+
+					"header {background-color: #292961;padding: 0 16px; z-index: 1000; margin-bottom: 0; min-height: 40px; border: 0; border-bottom: 1px solid #e5e5e5; position: fixed; top: 0; left: 0; right: 0; border-radius: 0;}"+
+					"header h1 {color:#ffeeff; margin-block-start: 0.5em;margin-block-end: 0.5em;}"+
 					"ul.samples {list-style: none; margin: 0; padding: 0;"+
 					" margin-block-start: 1px; margin-block-end: 1px;}\n"+
 					"ul.samples li {display: inline-block; width: 300px; text-shadow: 1px 1px 3px #cccccc;}\n"+
@@ -28,7 +30,9 @@ var page = []html.HtmlElement{
 					"ul.samples li.good {background-color: #c0e0c0;}\n")),
 		),
 		html.Body().AddElements(
-			html.Heading(html.Level(1)).AddElements(html.Content("The Title of the Page")),
+			html.Header().AddElements(
+				html.Heading(html.Level(1)).AddElements(html.Content("The Title of the Page")),
+			),
 			html.P().AddElements(html.Content("This is the first sentence.")),
 			html.Ul(html.Class("samples")).AddElements(
 				html.Li().AddElements(

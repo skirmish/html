@@ -52,6 +52,8 @@ Elements currently supported (absolute bare minimum):
  * li
  * div
  * span
+ * header
+ * footer
  
 
 Notes:
