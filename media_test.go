@@ -24,17 +24,17 @@ var mediaTestCases = []HTMLTestCase{
 	},
 	{
 		name:    "image",
-		output:  "<img/>",
+		output:  "<img>",
 		element: Img(),
 	},
 	{
 		name:    "image with src",
-		output:  "<img src=\"asource\"/>",
+		output:  "<img src=\"asource\">",
 		element: Img(Src("asource")),
 	},
 	{
 		name:   "figure with bits",
-		output: "<figure class=\"fig\"><img src=\"another\"/><figcaption class=\"fc1\">Some caption</figcaption></figure>",
+		output: "<figure class=\"fig\"><img src=\"another\"><figcaption class=\"fc1\">Some caption</figcaption></figure>",
 		element: Figure(Class("fig")).AddElements(
 			Img(Src("another")),
 			FigCaption(Class("fc1")).AddElements(Content("Some caption")),
@@ -42,7 +42,7 @@ var mediaTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "audio with source",
-		output: "<audio class=\"a\"><source src=\"something.ogg\" type=\"audio/ogg\"/><source src=\"something.mp3\" type=\"audio/mp3\"/>audio not supported</audio>",
+		output: "<audio class=\"a\"><source src=\"something.ogg\" type=\"audio/ogg\"><source src=\"something.mp3\" type=\"audio/mp3\">audio not supported</audio>",
 		element: Audio(Class("a")).AddElements(
 			Source(Src("something.ogg"), Type("audio/ogg")),
 			Source(Src("something.mp3"), Type("audio/mp3")),
@@ -51,7 +51,7 @@ var mediaTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "video with source",
-		output: "<video class=\"v\"><source src=\"something.mp4\" type=\"video/mp4\"/><source src=\"something.ogg\" type=\"video/ogg\"/>video not supported</video>",
+		output: "<video class=\"v\"><source src=\"something.mp4\" type=\"video/mp4\"><source src=\"something.ogg\" type=\"video/ogg\">video not supported</video>",
 		element: Video(Class("v")).AddElements(
 			Source(Src("something.mp4"), Type("video/mp4")),
 			Source(Src("something.ogg"), Type("video/ogg")),
@@ -60,7 +60,7 @@ var mediaTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "picture",
-		output: "<picture class=\"pic1\"><source srcset=\"some.jpg\"/></picture>",
+		output: "<picture class=\"pic1\"><source srcset=\"some.jpg\"></picture>",
 		element: Picture(Class("pic1")).AddElements(
 			Source(SrcSet("some.jpg")),
 		),
@@ -72,7 +72,7 @@ var mediaTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "img, area,map",
-		output: "<section><img src=\"asource.jpg\" usemap=\"#amap\"/><map name=\"amap\"><area shape=\"rect\" coords=\"34,44,270,350\" href=\"one.html\"/><area shape=\"circle\" coords=\"100,150,50\" href=\"two.html\"/></map></section>",
+		output: "<section><img src=\"asource.jpg\" usemap=\"#amap\"><map name=\"amap\"><area shape=\"rect\" coords=\"34,44,270,350\" href=\"one.html\"><area shape=\"circle\" coords=\"100,150,50\" href=\"two.html\"></map></section>",
 		element: Section().AddElements(
 			Img(Src("asource.jpg"), UseMap("#amap")),
 			Map(Name("amap")).AddElements(

@@ -94,6 +94,7 @@ type br struct {
 func Br(attrs ...func(HtmlElement)) HtmlElement {
 	f := &br{}
 	f.tag = "br"
+	f.empty = true
 	for _, attr := range attrs {
 		attr(f)
 	}

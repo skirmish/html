@@ -140,7 +140,7 @@ var htmlTestCases = []HTMLTestCase{
 	},
 	{ //<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		name:    "meta viewport",
-		output:  "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>",
+		output:  "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
 		element: Meta(Name("viewport"), ContentAttr("width=device-width, initial-scale=1.0")),
 	},
 }

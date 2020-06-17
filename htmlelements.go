@@ -34,7 +34,8 @@ func (kv *KeyVal) getRenderSize() int {
 }
 
 type Element struct {
-	tag        string
+	tag        string // the tag name
+	empty      bool   // Is it an empty tag e.g. <br>
 	attributes []KeyVal
 	childData  []byte
 	children   []HtmlElement
@@ -95,7 +96,7 @@ func (e *Element) Render(w io.Writer) (int, error) {
 	return e.RenderElement(w, e.tag, e.children)
 }
 
-func (a *Element) RenderElement(w io.Writer, tag string, children []HtmlElement) (int, error) {
+func (e *Element) RenderElement(w io.Writer, tag string, children []HtmlElement) (int, error) {
 	n, err := w.Write([]byte("<"))
 	if err != nil {
 		return n, err
@@ -105,18 +106,27 @@ func (a *Element) RenderElement(w io.Writer, tag string, children []HtmlElement)
 		return n, err
 	}
 	n += o
-	o, err = a.RenderAttr(w) // Attributes
+	o, err = e.RenderAttr(w) // Attributes
 	if err != nil {
 		return n, err
 	}
 	n += o
 	if children == nil {
-		o, err = w.Write([]byte("/>"))
-		if err != nil {
+		if e.empty {
+			o, err = w.Write([]byte(">"))
+			if err != nil {
+				return n, err
+			}
+			n += o
+			return n, err
+		} else {
+			o, err = w.Write([]byte("/>"))
+			if err != nil {
+				return n, err
+			}
+			n += o
 			return n, err
 		}
-		n += o
-		return n, err
 	}
 	o, err = w.Write([]byte(">"))
 	if err != nil {
@@ -153,17 +163,17 @@ func (a *Element) RenderElement(w io.Writer, tag string, children []HtmlElement)
 }
 
 // FastRender - Do NOT use
-func (a *Element) FastRender(w io.Writer, tag string, children []HtmlElement) (int, error) {
-	if len(a.childData) == 0 {
+func (e *Element) FastRender(w io.Writer, tag string, children []HtmlElement) (int, error) {
+	if len(e.childData) == 0 {
 		// Record the rendering into childata.
 		buf := new(bytes.Buffer)
-		_, err := a.RenderElement(buf, tag, children)
+		_, err := e.RenderElement(buf, tag, children)
 		if err != nil {
 			return 0, err
 		}
-		a.childData = buf.Bytes()
+		e.childData = buf.Bytes()
 	}
-	n, err := w.Write(a.childData)
+	n, err := w.Write(e.childData)
 	return n, err
 }
 

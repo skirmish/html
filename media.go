@@ -27,6 +27,7 @@ type image struct {
 func Img(attrs ...func(HtmlElement)) HtmlElement {
 	i := &image{}
 	i.tag = "img"
+	i.empty = true
 	for _, attr := range attrs {
 		attr(i)
 	}
@@ -181,6 +182,7 @@ type area struct {
 func Area(attrs ...func(HtmlElement)) HtmlElement {
 	i := &area{}
 	i.tag = "area"
+	i.empty = true
 	for _, attr := range attrs {
 		attr(i)
 	}
@@ -218,6 +220,7 @@ type source struct {
 func Source(attrs ...func(HtmlElement)) HtmlElement {
 	i := &source{}
 	i.tag = "source"
+	i.empty = true
 	for _, attr := range attrs {
 		attr(i)
 	}

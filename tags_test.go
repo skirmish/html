@@ -19,12 +19,12 @@ var tagsTestCases = []HTMLTestCase{
 	},
 	{
 		name:    "br",
-		output:  "<br/>",
+		output:  "<br>",
 		element: Br(),
 	},
 	{
 		name:    "b with content and class",
-		output:  "<br class=\"name\"/>",
+		output:  "<br class=\"name\">",
 		element: Br(Class("name")).AddElements(Content("something")),
 	},
 	{

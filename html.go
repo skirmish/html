@@ -65,6 +65,7 @@ type meta struct {
 func Meta(attrs ...func(HtmlElement)) HtmlElement {
 	m := &meta{}
 	m.tag = "meta"
+	m.empty = true
 	for _, attr := range attrs {
 		attr(m)
 	}
