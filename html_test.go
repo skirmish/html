@@ -29,6 +29,11 @@ var htmlTestCases = []HTMLTestCase{
 		element: Html(Lang("en")),
 	},
 	{
+		name:    "html lang=en",
+		output:  "<html lang=\"en-us\"/>",
+		element: Html(Lang("en-us")),
+	},
+	{
 		name:    "body",
 		output:  "<body/>",
 		element: Body(),
@@ -70,9 +75,26 @@ var htmlTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "form with fieldset with formid",
-		output: "<form><fieldset form=\"someform\"/></form>",
+		output: "<form><fieldset form=\"someform\"><label class=\"som\"><input id=\"in1\" name=\"nom\"/></label><label class=\"som\"><textarea id=\"ta1\">content of the ares</textarea></label><label class=\"sel\"><select class=\"sel\"><optgroup class=\"som\"><option value=\"1\">One</option><option value=\"2\">Two</option></optgroup></select></label><button class=\"cl1\" id=\"sub\" value=\"button\"/><output class=\"cl1\">content</output></fieldset></form>",
 		element: Form().AddElements(
-			Fieldset(FormId("someform")),
+			Fieldset(FormId("someform")).AddElements(
+				Label(Class("som")).AddElements(
+					Input(Id("in1"), Name("nom")),
+				),
+				Label(Class("som")).AddElements(
+					TextArea(Id("ta1")).AddElements(Content("content of the ares")),
+				),
+				Label(Class("sel")).AddElements(
+					Select(Class("sel")).AddElements(
+						OptGroup(Class("som")).AddElements(
+							Option(Value("1")).AddElements(Content("One")),
+							Option(Value("2")).AddElements(Content("Two")),
+						),
+					),
+				),
+				Button(Class("cl1"), Id("sub"), Value("button")),
+				Output(Class("cl1")).AddElements(Content("content")),
+			),
 		),
 	},
 	{
@@ -124,6 +146,11 @@ var htmlTestCases = []HTMLTestCase{
 		name:    "style with type content",
 		output:  "<style type=\"text/css\">content</style>",
 		element: Style(Type("text/css")).AddElements(Content("content")),
+	},
+	{ //<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		name:    "meta viewport",
+		output:  "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>",
+		element: Meta(Name("viewport"), ContentAttr("width=device-width, initial-scale=1.0")),
 	},
 }
 

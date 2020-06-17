@@ -141,3 +141,171 @@ func (s *section) AddElements(elements ...HtmlElement) HtmlElement {
 func (s *section) addAttribute(key string, val string) {
 	s.Element.AddAttribute(key, val)
 }
+
+type nav struct {
+	Element
+	Children []HtmlElement
+}
+
+func Nav(attrs ...func(HtmlElement)) HtmlElement {
+	ul := &nav{}
+	for _, attr := range attrs {
+		attr(ul)
+	}
+	return ul
+}
+
+func (s *nav) Render(w io.Writer) (int, error) {
+	return s.Element.Render(w, "nav", s.Children)
+}
+
+func (s *nav) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		s.Children = append(s.Children, element)
+	}
+	return s
+}
+
+func (s *nav) addAttribute(key string, val string) {
+	s.Element.AddAttribute(key, val)
+}
+
+type details struct {
+	Element
+	Children []HtmlElement
+}
+
+func Details(attrs ...func(HtmlElement)) HtmlElement {
+	ul := &details{}
+	for _, attr := range attrs {
+		attr(ul)
+	}
+	return ul
+}
+
+func (s *details) Render(w io.Writer) (int, error) {
+	return s.Element.Render(w, "details", s.Children)
+}
+
+func (s *details) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		s.Children = append(s.Children, element)
+	}
+	return s
+}
+
+func (s *details) addAttribute(key string, val string) {
+	s.Element.AddAttribute(key, val)
+}
+
+type main struct {
+	Element
+	Children []HtmlElement
+}
+
+func Main(attrs ...func(HtmlElement)) HtmlElement {
+	ul := &main{}
+	for _, attr := range attrs {
+		attr(ul)
+	}
+	return ul
+}
+
+func (s *main) Render(w io.Writer) (int, error) {
+	return s.Element.Render(w, "main", s.Children)
+}
+
+func (s *main) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		s.Children = append(s.Children, element)
+	}
+	return s
+}
+
+func (s *main) addAttribute(key string, val string) {
+	s.Element.AddAttribute(key, val)
+}
+
+type mark struct {
+	Element
+	Children []HtmlElement
+}
+
+func Mark(attrs ...func(HtmlElement)) HtmlElement {
+	ul := &mark{}
+	for _, attr := range attrs {
+		attr(ul)
+	}
+	return ul
+}
+
+func (s *mark) Render(w io.Writer) (int, error) {
+	return s.Element.Render(w, "mark", s.Children)
+}
+
+func (s *mark) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		s.Children = append(s.Children, element)
+	}
+	return s
+}
+
+func (s *mark) addAttribute(key string, val string) {
+	s.Element.AddAttribute(key, val)
+}
+
+type summary struct {
+	Element
+	Children []HtmlElement
+}
+
+func Summary(attrs ...func(HtmlElement)) HtmlElement {
+	ul := &summary{}
+	for _, attr := range attrs {
+		attr(ul)
+	}
+	return ul
+}
+
+func (s *summary) Render(w io.Writer) (int, error) {
+	return s.Element.Render(w, "summary", s.Children)
+}
+
+func (s *summary) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		s.Children = append(s.Children, element)
+	}
+	return s
+}
+
+func (s *summary) addAttribute(key string, val string) {
+	s.Element.AddAttribute(key, val)
+}
+
+type time struct {
+	Element
+	Children []HtmlElement
+}
+
+func Time(attrs ...func(HtmlElement)) HtmlElement {
+	ul := &time{}
+	for _, attr := range attrs {
+		attr(ul)
+	}
+	return ul
+}
+
+func (s *time) Render(w io.Writer) (int, error) {
+	return s.Element.Render(w, "time", s.Children)
+}
+
+func (s *time) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		s.Children = append(s.Children, element)
+	}
+	return s
+}
+
+func (s *time) addAttribute(key string, val string) {
+	s.Element.AddAttribute(key, val)
+}

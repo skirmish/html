@@ -37,6 +37,21 @@ var headerfooterTestCases = []HTMLTestCase{
 		element: Section(),
 	},
 	{
+		name:    "section with content",
+		output:  "<section class=\"name\">content</section>",
+		element: Section(Class("name")).AddElements(Content("content")),
+	},
+	{
+		name:    "nav",
+		output:  "<nav/>",
+		element: Nav(),
+	},
+	{
+		name:    "nav with content",
+		output:  "<nav class=\"name\">content</nav>",
+		element: Nav(Class("name")).AddElements(Content("content")),
+	},
+	{
 		name:    "aside",
 		output:  "<aside/>",
 		element: Aside(),

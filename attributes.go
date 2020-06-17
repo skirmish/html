@@ -50,6 +50,13 @@ func Type(t string) func(HtmlElement) {
 	}
 }
 
+// ContentAttr - meta
+func ContentAttr(t string) func(HtmlElement) {
+	return func(m HtmlElement) {
+		m.addAttribute("content", t)
+	}
+}
+
 //Global Attributes
 ////accesskey	Specifies a shortcut key to activate/focus an element
 ////class	Specifies one or more classnames for an element (refers to a class in a style sheet)

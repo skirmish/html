@@ -29,3 +29,59 @@ func (i *image) AddElements(elements ...HtmlElement) HtmlElement {
 func (i *image) addAttribute(key string, val string) {
 	i.Element.AddAttribute(key, val)
 }
+
+type figure struct {
+	Element
+	Children []HtmlElement
+}
+
+func Figure(attrs ...func(HtmlElement)) HtmlElement {
+	i := &figure{}
+	for _, attr := range attrs {
+		attr(i)
+	}
+	return i
+}
+
+func (a *figure) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "figure", a.Children)
+}
+
+func (i *figure) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		i.Children = append(i.Children, element)
+	}
+	return i
+}
+
+func (i *figure) addAttribute(key string, val string) {
+	i.Element.AddAttribute(key, val)
+}
+
+type figcaption struct {
+	Element
+	Children []HtmlElement
+}
+
+func FigCaption(attrs ...func(HtmlElement)) HtmlElement {
+	i := &figcaption{}
+	for _, attr := range attrs {
+		attr(i)
+	}
+	return i
+}
+
+func (a *figcaption) Render(w io.Writer) (int, error) {
+	return a.Element.Render(w, "figcaption", a.Children)
+}
+
+func (i *figcaption) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		i.Children = append(i.Children, element)
+	}
+	return i
+}
+
+func (i *figcaption) addAttribute(key string, val string) {
+	i.Element.AddAttribute(key, val)
+}
