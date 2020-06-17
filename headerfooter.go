@@ -9,6 +9,7 @@ type header struct {
 
 func Header(attrs ...func(HtmlElement)) HtmlElement {
 	b := &header{}
+	b.tag = "header"
 	for _, attr := range attrs {
 		attr(b)
 	}
@@ -26,10 +27,6 @@ func (h *header) AddElements(elements ...HtmlElement) HtmlElement {
 	return h
 }
 
-func (h *header) addAttribute(key string, val string) {
-	h.Element.AddAttribute(key, val)
-}
-
 type footer struct {
 	Element
 	Children []HtmlElement
@@ -37,6 +34,7 @@ type footer struct {
 
 func Footer(attrs ...func(HtmlElement)) HtmlElement {
 	b := &footer{}
+	b.tag = "footer"
 	for _, attr := range attrs {
 		attr(b)
 	}
@@ -54,10 +52,6 @@ func (f *footer) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *footer) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type article struct {
 	Element
 	Children []HtmlElement
@@ -65,6 +59,7 @@ type article struct {
 
 func Article(attrs ...func(HtmlElement)) HtmlElement {
 	f := &article{}
+	f.tag = "article"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -82,10 +77,6 @@ func (a *article) AddElements(elements ...HtmlElement) HtmlElement {
 	return a
 }
 
-func (a *article) addAttribute(key string, val string) {
-	a.Element.AddAttribute(key, val)
-}
-
 type aside struct {
 	Element
 	Children []HtmlElement
@@ -93,6 +84,7 @@ type aside struct {
 
 func Aside(attrs ...func(HtmlElement)) HtmlElement {
 	f := &aside{}
+	f.tag = "aside"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -110,10 +102,6 @@ func (a *aside) AddElements(elements ...HtmlElement) HtmlElement {
 	return a
 }
 
-func (a *aside) addAttribute(key string, val string) {
-	a.Element.AddAttribute(key, val)
-}
-
 type section struct {
 	Element
 	Children []HtmlElement
@@ -121,6 +109,7 @@ type section struct {
 
 func Section(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &section{}
+	ul.tag = "section"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -138,10 +127,6 @@ func (s *section) AddElements(elements ...HtmlElement) HtmlElement {
 	return s
 }
 
-func (s *section) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
-}
-
 type nav struct {
 	Element
 	Children []HtmlElement
@@ -149,6 +134,7 @@ type nav struct {
 
 func Nav(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &nav{}
+	ul.tag = "nav"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -166,10 +152,6 @@ func (s *nav) AddElements(elements ...HtmlElement) HtmlElement {
 	return s
 }
 
-func (s *nav) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
-}
-
 type details struct {
 	Element
 	Children []HtmlElement
@@ -177,6 +159,7 @@ type details struct {
 
 func Details(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &details{}
+	ul.tag = "details"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -194,10 +177,6 @@ func (s *details) AddElements(elements ...HtmlElement) HtmlElement {
 	return s
 }
 
-func (s *details) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
-}
-
 type main struct {
 	Element
 	Children []HtmlElement
@@ -205,6 +184,7 @@ type main struct {
 
 func Main(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &main{}
+	ul.tag = "main"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -222,10 +202,6 @@ func (s *main) AddElements(elements ...HtmlElement) HtmlElement {
 	return s
 }
 
-func (s *main) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
-}
-
 type mark struct {
 	Element
 	Children []HtmlElement
@@ -233,6 +209,7 @@ type mark struct {
 
 func Mark(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &mark{}
+	ul.tag = "mark"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -250,10 +227,6 @@ func (s *mark) AddElements(elements ...HtmlElement) HtmlElement {
 	return s
 }
 
-func (s *mark) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
-}
-
 type summary struct {
 	Element
 	Children []HtmlElement
@@ -261,6 +234,7 @@ type summary struct {
 
 func Summary(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &summary{}
+	ul.tag = "summary"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -278,10 +252,6 @@ func (s *summary) AddElements(elements ...HtmlElement) HtmlElement {
 	return s
 }
 
-func (s *summary) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
-}
-
 type time struct {
 	Element
 	Children []HtmlElement
@@ -289,6 +259,7 @@ type time struct {
 
 func Time(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &time{}
+	ul.tag = "time"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -304,8 +275,4 @@ func (s *time) AddElements(elements ...HtmlElement) HtmlElement {
 		s.Children = append(s.Children, element)
 	}
 	return s
-}
-
-func (s *time) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
 }

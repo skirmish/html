@@ -6,7 +6,27 @@ import (
 	"testing"
 )
 
-var meterTestCases = []HTMLTestCase{
+var tagsTestCases = []HTMLTestCase{
+	{
+		name:    "b",
+		output:  "<b/>",
+		element: B(),
+	},
+	{
+		name:    "b with content and class",
+		output:  "<b class=\"name\">something</b>",
+		element: B(Class("name")).AddElements(Content("something")),
+	},
+	{
+		name:    "br",
+		output:  "<br/>",
+		element: Br(),
+	},
+	{
+		name:    "b with content and class",
+		output:  "<br class=\"name\"/>",
+		element: Br(Class("name")).AddElements(Content("something")),
+	},
 	{
 		name:    "meter",
 		output:  "<meter/>",
@@ -40,10 +60,20 @@ var meterTestCases = []HTMLTestCase{
 			Content("2 out of 10"),
 		),
 	},
+	{
+		name:    "blockquote",
+		output:  "<blockquote/>",
+		element: Blockquote(),
+	},
+	{
+		name:    "blockquote with content and class",
+		output:  "<blockquote class=\"name\">something</blockquote>",
+		element: Blockquote(Class("name")).AddElements(Content("something")),
+	},
 }
 
-func Test_MeterGeneration(t *testing.T) {
-	for _, testCase := range meterTestCases {
+func Test_TagGeneration(t *testing.T) {
+	for _, testCase := range tagsTestCases {
 		t.Logf("Test %s", testCase.name)
 
 		buf := new(bytes.Buffer)

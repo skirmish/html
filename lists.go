@@ -9,6 +9,7 @@ type unorderedlist struct {
 
 func Ul(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &unorderedlist{}
+	ul.tag = "ul"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -26,10 +27,6 @@ func (u *unorderedlist) AddElements(elements ...HtmlElement) HtmlElement {
 	return u
 }
 
-func (u *unorderedlist) addAttribute(key string, val string) {
-	u.Element.AddAttribute(key, val)
-}
-
 type orderedlist struct {
 	Element
 	Children []HtmlElement
@@ -37,6 +34,7 @@ type orderedlist struct {
 
 func Ol(attrs ...func(HtmlElement)) HtmlElement {
 	ul := &orderedlist{}
+	ul.tag = "ol"
 	for _, attr := range attrs {
 		attr(ul)
 	}
@@ -54,10 +52,6 @@ func (u *orderedlist) AddElements(elements ...HtmlElement) HtmlElement {
 	return u
 }
 
-func (u *orderedlist) addAttribute(key string, val string) {
-	u.Element.AddAttribute(key, val)
-}
-
 type listitem struct {
 	Element
 	Children []HtmlElement
@@ -65,11 +59,13 @@ type listitem struct {
 
 func Li(attrs ...func(HtmlElement)) HtmlElement {
 	li := &listitem{}
+	li.tag = "li"
 	for _, attr := range attrs {
 		attr(li)
 	}
 	return li
 }
+
 func (l *listitem) Render(w io.Writer) (int, error) {
 	return l.Element.Render(w, "li", l.Children)
 }
@@ -81,10 +77,6 @@ func (l *listitem) AddElements(elements ...HtmlElement) HtmlElement {
 	return l
 }
 
-func (l *listitem) addAttribute(key string, val string) {
-	l.Element.AddAttribute(key, val)
-}
-
 type dl struct {
 	Element
 	Children []HtmlElement
@@ -92,6 +84,7 @@ type dl struct {
 
 func Dl(attrs ...func(HtmlElement)) HtmlElement {
 	f := &dl{}
+	f.tag = "dl"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -109,10 +102,6 @@ func (a *dl) AddElements(elements ...HtmlElement) HtmlElement {
 	return a
 }
 
-func (a *dl) addAttribute(key string, val string) {
-	a.Element.AddAttribute(key, val)
-}
-
 type dt struct {
 	Element
 	Children []HtmlElement
@@ -120,6 +109,7 @@ type dt struct {
 
 func Dt(attrs ...func(HtmlElement)) HtmlElement {
 	f := &dt{}
+	f.tag = "dt"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -137,10 +127,6 @@ func (a *dt) AddElements(elements ...HtmlElement) HtmlElement {
 	return a
 }
 
-func (a *dt) addAttribute(key string, val string) {
-	a.Element.AddAttribute(key, val)
-}
-
 type dd struct {
 	Element
 	Children []HtmlElement
@@ -148,6 +134,7 @@ type dd struct {
 
 func Dd(attrs ...func(HtmlElement)) HtmlElement {
 	f := &dd{}
+	f.tag = "dd"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -163,8 +150,4 @@ func (a *dd) AddElements(elements ...HtmlElement) HtmlElement {
 		a.Children = append(a.Children, element)
 	}
 	return a
-}
-
-func (a *dd) addAttribute(key string, val string) {
-	a.Element.AddAttribute(key, val)
 }

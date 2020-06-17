@@ -1,20 +1,23 @@
 package html
 
-import "io"
+import (
+	"bytes"
+	"io"
+)
 
 type HtmlElement interface {
 	Render(w io.Writer) (n int, err error)
 	AddElements(elements ...HtmlElement) HtmlElement
-	addAttribute(key string, val string)
+	AddAttribute(key string, val string)
 }
 
 // sizer is an interface that returns the size of what the rendered element would be.
 type sizer interface {
-	GetRenderSize() int
+	getRenderSize() int // If it is a static thing, then we can get a size.
 }
 
 type variabler interface {
-	IsDynamic() bool
+	isDynamic() bool // If the thing is dynamic
 }
 
 type KeyVal struct {
@@ -22,7 +25,7 @@ type KeyVal struct {
 	Value string
 }
 
-func (kv *KeyVal) GetRenderSize() int {
+func (kv *KeyVal) getRenderSize() int {
 	size := 3 // account for =""
 	size += len(kv.Key)
 	size += len(kv.Value)
@@ -31,7 +34,10 @@ func (kv *KeyVal) GetRenderSize() int {
 }
 
 type Element struct {
+	tag        string
 	attributes []KeyVal
+	childData  []byte
+	children   []HtmlElement
 }
 
 func (e *Element) InitAttributes() {
@@ -142,11 +148,26 @@ func (a *Element) Render(w io.Writer, tag string, children []HtmlElement) (int, 
 	return n, err
 }
 
-func (e *Element) GetRenderSize() int {
+// FastRender - Do NOT use
+func (a *Element) FastRender(w io.Writer, tag string, children []HtmlElement) (int, error) {
+	if len(a.childData) == 0 {
+		// Record the rendering into childata.
+		buf := new(bytes.Buffer)
+		_, err := a.Render(buf, tag, children)
+		if err != nil {
+			return 0, err
+		}
+		a.childData = buf.Bytes()
+	}
+	n, err := w.Write(a.childData)
+	return n, err
+}
+
+func (e *Element) getRenderSize() int {
 	size := 1 // account for :space:
 	size += len(e.attributes) - 1
 	for _, el := range e.attributes {
-		size += el.GetRenderSize()
+		size += el.getRenderSize()
 	}
 	return size
 }

@@ -75,7 +75,6 @@ HTML Tags (* means implemented)
 *<!DOCTYPE>
 *<a>
 <abbr>
-<acronym>
 <address>
 <area>
 *<article>
@@ -83,17 +82,14 @@ HTML Tags (* means implemented)
 <audio>
 *<b>
 <base>
-<basefont>
 <bdi>
 <bdo>
-<big>
 *<blockquote>
 *<body>
 *<br>
 *<button>
 *<canvas>
 *<caption>
-<center>
 <cite>
 <code>
 *<col>
@@ -105,7 +101,6 @@ HTML Tags (* means implemented)
 <details>
 <dfn>
 <dialog>
-<dir>
 *<div>
 *<dl>
 *<dt>

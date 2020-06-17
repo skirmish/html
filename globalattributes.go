@@ -21,36 +21,36 @@ package html
 
 func AccessKey(accesskey string) func(e HtmlElement) {
 	return func(e HtmlElement) {
-		e.addAttribute("accesskey", accesskey)
+		e.AddAttribute("accesskey", accesskey)
 	}
 }
 
 func Class(class string) func(e HtmlElement) {
 	return func(e HtmlElement) {
-		e.addAttribute("class", class)
+		e.AddAttribute("class", class)
 	}
 }
 
 func Hidden(hidden string) func(e HtmlElement) {
 	return func(e HtmlElement) {
-		e.addAttribute("hidden", hidden)
+		e.AddAttribute("hidden", hidden)
 	}
 }
 
 func Id(id string) func(element HtmlElement) {
 	return func(element HtmlElement) {
-		element.addAttribute("id", id)
+		element.AddAttribute("id", id)
 	}
 }
 
 func Lang(lang string) func(element HtmlElement) {
 	return func(element HtmlElement) {
-		element.addAttribute("lang", lang)
+		element.AddAttribute("lang", lang)
 	}
 }
 
 func TitleAttr(title string) func(element HtmlElement) {
 	return func(element HtmlElement) {
-		element.addAttribute("title", title)
+		element.AddAttribute("title", title)
 	}
 }

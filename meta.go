@@ -8,6 +8,7 @@ type meta struct {
 
 func Meta(attrs ...func(HtmlElement)) HtmlElement {
 	m := &meta{}
+	m.tag = "meta"
 	for _, attr := range attrs {
 		attr(m)
 	}
@@ -24,9 +25,3 @@ func (m *meta) AddElements(elements ...HtmlElement) HtmlElement {
 	//}
 	return m
 }
-
-func (m *meta) addAttribute(key string, val string) {
-	m.Element.AddAttribute(key, val)
-}
-
-//<meta charset=\"utf-8\"/>"

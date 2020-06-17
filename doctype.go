@@ -17,7 +17,3 @@ func (d *docType) Render(w io.Writer) (int, error) {
 func (d *docType) AddElements(elements ...HtmlElement) HtmlElement {
 	return d
 }
-
-func (d *docType) addAttribute(key string, val string) {
-	d.Element.AddAttribute(key, val)
-}

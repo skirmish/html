@@ -16,6 +16,7 @@ func Heading(attrs ...func(*heading)) HtmlElement {
 	for _, attr := range attrs {
 		attr(h)
 	}
+	h.tag = fmt.Sprintf("h%d", h.Level)
 	return h
 }
 
@@ -34,8 +35,4 @@ func (h *heading) AddElements(elements ...HtmlElement) HtmlElement {
 		h.Children = append(h.Children, element)
 	}
 	return h
-}
-
-func (h *heading) addAttribute(key string, val string) {
-	h.Element.AddAttribute(key, val)
 }

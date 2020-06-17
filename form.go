@@ -9,6 +9,7 @@ type form struct {
 
 func Form(attrs ...func(HtmlElement)) HtmlElement {
 	f := &form{}
+	f.tag = "form"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -26,10 +27,6 @@ func (f *form) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *form) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type fieldset struct {
 	Element
 	Children []HtmlElement
@@ -37,6 +34,7 @@ type fieldset struct {
 
 func Fieldset(attrs ...func(HtmlElement)) HtmlElement {
 	f := &fieldset{}
+	f.tag = "fieldset"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -54,10 +52,6 @@ func (f *fieldset) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *fieldset) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type input struct {
 	Element
 	Children []HtmlElement
@@ -65,6 +59,7 @@ type input struct {
 
 func Input(attrs ...func(HtmlElement)) HtmlElement {
 	f := &input{}
+	f.tag = "input"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -82,10 +77,6 @@ func (f *input) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *input) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type textarea struct {
 	Element
 	Children []HtmlElement
@@ -93,6 +84,7 @@ type textarea struct {
 
 func TextArea(attrs ...func(HtmlElement)) HtmlElement {
 	f := &textarea{}
+	f.tag = "textarea"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -110,10 +102,6 @@ func (f *textarea) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *textarea) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type button struct {
 	Element
 	Children []HtmlElement
@@ -121,6 +109,7 @@ type button struct {
 
 func Button(attrs ...func(HtmlElement)) HtmlElement {
 	f := &button{}
+	f.tag = "button"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -138,10 +127,6 @@ func (f *button) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *button) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type selectelement struct {
 	Element
 	Children []HtmlElement
@@ -149,6 +134,7 @@ type selectelement struct {
 
 func Select(attrs ...func(HtmlElement)) HtmlElement {
 	f := &selectelement{}
+	f.tag = "select"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -166,10 +152,6 @@ func (f *selectelement) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *selectelement) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type option struct {
 	Element
 	Children []HtmlElement
@@ -177,6 +159,7 @@ type option struct {
 
 func Option(attrs ...func(HtmlElement)) HtmlElement {
 	f := &option{}
+	f.tag = "option"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -194,10 +177,6 @@ func (f *option) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *option) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type optgroup struct {
 	Element
 	Children []HtmlElement
@@ -205,6 +184,7 @@ type optgroup struct {
 
 func OptGroup(attrs ...func(HtmlElement)) HtmlElement {
 	f := &optgroup{}
+	f.tag = "optgroup"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -222,10 +202,6 @@ func (f *optgroup) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *optgroup) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type label struct {
 	Element
 	Children []HtmlElement
@@ -233,6 +209,7 @@ type label struct {
 
 func Label(attrs ...func(HtmlElement)) HtmlElement {
 	f := &label{}
+	f.tag = "label"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -250,10 +227,6 @@ func (f *label) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *label) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
-}
-
 type output struct {
 	Element
 	Children []HtmlElement
@@ -261,6 +234,7 @@ type output struct {
 
 func Output(attrs ...func(HtmlElement)) HtmlElement {
 	f := &output{}
+	f.tag = "output"
 	for _, attr := range attrs {
 		attr(f)
 	}
@@ -278,6 +252,27 @@ func (f *output) AddElements(elements ...HtmlElement) HtmlElement {
 	return f
 }
 
-func (f *output) addAttribute(key string, val string) {
-	f.Element.AddAttribute(key, val)
+type legend struct {
+	Element
+	Children []HtmlElement
+}
+
+func Legend(attrs ...func(HtmlElement)) HtmlElement {
+	f := &legend{}
+	f.tag = "legend"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (f *legend) Render(w io.Writer) (int, error) {
+	return f.Element.Render(w, "legend", f.Children)
+}
+
+func (f *legend) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		f.Children = append(f.Children, element)
+	}
+	return f
 }

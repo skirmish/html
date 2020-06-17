@@ -12,7 +12,7 @@ func Test_AttributeSizing(t *testing.T) {
 		Value: "value",
 	}
 
-	size := kv.GetRenderSize()
+	size := kv.getRenderSize()
 	assert.Equal(t, 11, size)
 }
 
@@ -20,7 +20,7 @@ func Test_ElementSizing(t *testing.T) {
 	e := &Element{}
 	e.AddAttribute("key", "value")
 
-	actual := e.GetRenderSize()
+	actual := e.getRenderSize()
 	buf := new(bytes.Buffer)
 	_, err := e.RenderAttr(buf)
 	assert.NoError(t, err)
@@ -28,14 +28,14 @@ func Test_ElementSizing(t *testing.T) {
 
 	buf.Reset()
 	e.AddAttribute("anotherkey", "another value")
-	actual = e.GetRenderSize()
+	actual = e.getRenderSize()
 	_, err = e.RenderAttr(buf)
 	assert.NoError(t, err)
 	assert.Equal(t, actual, buf.Len())
 
 	buf.Reset()
 	e.AddAttribute("thirdkey", "value")
-	actual = e.GetRenderSize()
+	actual = e.getRenderSize()
 	_, err = e.RenderAttr(buf)
 	assert.NoError(t, err)
 	assert.Equal(t, actual, buf.Len())

@@ -75,9 +75,10 @@ var htmlTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "form with fieldset with formid",
-		output: "<form><fieldset form=\"someform\"><label class=\"som\"><input id=\"in1\" name=\"nom\"/></label><label class=\"som\"><textarea id=\"ta1\">content of the ares</textarea></label><label class=\"sel\"><select class=\"sel\"><optgroup class=\"som\"><option value=\"1\">One</option><option value=\"2\">Two</option></optgroup></select></label><button class=\"cl1\" id=\"sub\" value=\"button\"/><output class=\"cl1\">content</output></fieldset></form>",
+		output: "<form><fieldset form=\"someform\"><legend class=\"l\">Section</legend><label class=\"som\"><input id=\"in1\" name=\"nom\"/></label><label class=\"som\"><textarea id=\"ta1\">content of the ares</textarea></label><label class=\"sel\"><select class=\"sel\"><optgroup class=\"som\"><option value=\"1\">One</option><option value=\"2\">Two</option></optgroup></select></label><button class=\"cl1\" id=\"sub\" value=\"button\">Click</button><output class=\"cl1\">content</output></fieldset></form>",
 		element: Form().AddElements(
 			Fieldset(FormId("someform")).AddElements(
+				Legend(Class("l")).AddElements(Content("Section")),
 				Label(Class("som")).AddElements(
 					Input(Id("in1"), Name("nom")),
 				),
@@ -92,7 +93,7 @@ var htmlTestCases = []HTMLTestCase{
 						),
 					),
 				),
-				Button(Class("cl1"), Id("sub"), Value("button")),
+				Button(Class("cl1"), Id("sub"), Value("button")).AddElements(Content("Click")),
 				Output(Class("cl1")).AddElements(Content("content")),
 			),
 		),
@@ -169,15 +170,40 @@ func runBenchmarkCases(b *testing.B, cases []HTMLTestCase) {
 	}
 }
 
+/*
+func runBenchmarkCasesFast(b *testing.B, cases []HTMLTestCase) {
+	for _, benchCase := range cases {
+		b.Run(benchCase.name + "-fast", func(b *testing.B) {
+			b.ReportAllocs()
+			for i := 0; i < b.N; i++ {
+				buf := new(bytes.Buffer)
+				n, _ := benchCase.element.FastRender(buf)
+				b.ReportMetric(float64(n), "bytes")
+				b.SetBytes(int64(n))
+			}
+		})
+	}
+}
+*/
 func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, htmlTestCases)
 	runBenchmarkCases(b, headingTestCases)
-	runBenchmarkCases(b, meterTestCases)
+	runBenchmarkCases(b, tagsTestCases)
 	runBenchmarkCases(b, headerfooterTestCases)
 	runBenchmarkCases(b, divspanTestCases)
-	runBenchmarkCases(b, brTestCases)
 	runBenchmarkCases(b, mediaTestCases)
 	runBenchmarkCases(b, listTestCases)
 	runBenchmarkCases(b, tableTestCases)
 	runBenchmarkCases(b, kitchenSinkTestCases)
+
+	/*	runBenchmarkCasesFast(b,htmlTestCases)
+		runBenchmarkCasesFast(b, headingTestCases)
+		runBenchmarkCasesFast(b, tagsTestCases)
+		runBenchmarkCasesFast(b, headerfooterTestCases)
+		runBenchmarkCasesFast(b, divspanTestCases)
+		runBenchmarkCasesFast(b, mediaTestCases)
+		runBenchmarkCasesFast(b, listTestCases)
+		runBenchmarkCasesFast(b, tableTestCases)
+		runBenchmarkCasesFast(b, kitchenSinkTestCases)
+	*/
 }

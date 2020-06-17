@@ -25,35 +25,77 @@ var attributes []attribute = []attribute{
 // Name - Attribute for form
 func Name(name string) func(HtmlElement) {
 	return func(f HtmlElement) {
-		f.addAttribute("name", name)
+		f.AddAttribute("name", name)
 	}
 }
 
 // Src - for image
 func Src(source string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("src", source)
+		i.AddAttribute("src", source)
+	}
+}
+
+// Href - for image
+func Href(href string) func(HtmlElement) {
+	return func(i HtmlElement) {
+		i.AddAttribute("href", href)
+	}
+}
+
+// UseMap - for image
+func UseMap(usemap string) func(HtmlElement) {
+	return func(i HtmlElement) {
+		i.AddAttribute("usemap", usemap)
+	}
+}
+
+// Shape - for area
+func Shape(shape string) func(HtmlElement) {
+	return func(i HtmlElement) {
+		i.AddAttribute("shape", shape)
+	}
+}
+
+// Coords - for area
+func Coords(coords string) func(HtmlElement) {
+	return func(i HtmlElement) {
+		i.AddAttribute("coords", coords)
 	}
 }
 
 // Charset - for meta
 func Charset(charset string) func(HtmlElement) {
 	return func(m HtmlElement) {
-		m.addAttribute("charset", charset)
+		m.AddAttribute("charset", charset)
+	}
+}
+
+// SrcSet - for Source
+func SrcSet(srcset string) func(HtmlElement) {
+	return func(m HtmlElement) {
+		m.AddAttribute("srcset", srcset)
+	}
+}
+
+// Media - for source
+func Media(media string) func(HtmlElement) {
+	return func(m HtmlElement) {
+		m.AddAttribute("media", media)
 	}
 }
 
 // Type - script/style
 func Type(t string) func(HtmlElement) {
 	return func(m HtmlElement) {
-		m.addAttribute("type", t)
+		m.AddAttribute("type", t)
 	}
 }
 
 // ContentAttr - meta
 func ContentAttr(t string) func(HtmlElement) {
 	return func(m HtmlElement) {
-		m.addAttribute("content", t)
+		m.AddAttribute("content", t)
 	}
 }
 
@@ -118,49 +160,49 @@ onsubmit	script	Fires when a form is submitted*/
 // FormId - meter
 func FormId(formid string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("form", formid)
+		i.AddAttribute("form", formid)
 	}
 }
 
 // High - meter
 func High(high string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("high", high)
+		i.AddAttribute("high", high)
 	}
 }
 
 // Low - meter
 func Low(low string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("low", low)
+		i.AddAttribute("low", low)
 	}
 }
 
 // Max - meter
 func Max(max string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("max", max)
+		i.AddAttribute("max", max)
 	}
 }
 
 // Min - meter
 func Min(min string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("min", min)
+		i.AddAttribute("min", min)
 	}
 }
 
 // Optimum - meter
 func Optimum(optimum string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("optimum", optimum)
+		i.AddAttribute("optimum", optimum)
 	}
 }
 
 // Value - meter
 func Value(value string) func(HtmlElement) {
 	return func(i HtmlElement) {
-		i.addAttribute("value", value)
+		i.AddAttribute("value", value)
 	}
 }
 

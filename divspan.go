@@ -9,6 +9,7 @@ type div struct {
 
 func Div(attrs ...func(HtmlElement)) HtmlElement {
 	b := &div{}
+	b.tag = "div"
 	for _, attr := range attrs {
 		attr(b)
 	}
@@ -26,10 +27,6 @@ func (d *div) AddElements(elements ...HtmlElement) HtmlElement {
 	return d
 }
 
-func (d *div) addAttribute(key string, val string) {
-	d.Element.AddAttribute(key, val)
-}
-
 type span struct {
 	Element
 	Children []HtmlElement
@@ -37,6 +34,7 @@ type span struct {
 
 func Span(attrs ...func(HtmlElement)) HtmlElement {
 	b := &span{}
+	b.tag = "span"
 	for _, attr := range attrs {
 		attr(b)
 	}
@@ -52,8 +50,4 @@ func (s *span) AddElements(elements ...HtmlElement) HtmlElement {
 		s.Children = append(s.Children, element)
 	}
 	return s
-}
-
-func (s *span) addAttribute(key string, val string) {
-	s.Element.AddAttribute(key, val)
 }

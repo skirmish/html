@@ -9,6 +9,7 @@ type head struct {
 
 func Head(attrs ...func(HtmlElement)) HtmlElement {
 	h := &head{}
+	h.tag = "head"
 	for _, attr := range attrs {
 		attr(h)
 	}
@@ -24,8 +25,4 @@ func (h *head) AddElements(elements ...HtmlElement) HtmlElement {
 		h.Children = append(h.Children, element)
 	}
 	return h
-}
-
-func (h *head) addAttribute(key string, val string) {
-	h.Element.AddAttribute(key, val)
 }

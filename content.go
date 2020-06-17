@@ -10,6 +10,7 @@ type content struct {
 // Content adds raw content to the stream.
 func Content(data string) HtmlElement {
 	c := &content{Content: data}
+	c.Element.tag = "body"
 	return c
 }
 

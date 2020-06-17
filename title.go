@@ -9,6 +9,7 @@ type title struct {
 
 func Title(attrs ...func(HtmlElement)) HtmlElement {
 	t := &title{}
+	t.tag = "title"
 	for _, attr := range attrs {
 		attr(t)
 	}
@@ -24,8 +25,4 @@ func (t *title) AddElements(elements ...HtmlElement) HtmlElement {
 		t.Children = append(t.Children, element)
 	}
 	return t
-}
-
-func (t *title) addAttribute(key string, val string) {
-	t.Element.AddAttribute(key, val)
 }

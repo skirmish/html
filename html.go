@@ -4,6 +4,7 @@ import "io"
 
 func Html(attrs ...func(HtmlElement)) HtmlElement {
 	h := &html{}
+	h.tag = "html"
 	for _, attr := range attrs {
 		attr(h)
 	}
@@ -24,8 +25,4 @@ func (h *html) AddElements(elements ...HtmlElement) HtmlElement {
 		h.Children = append(h.Children, element)
 	}
 	return h
-}
-
-func (h *html) addAttribute(key string, val string) {
-	h.Element.AddAttribute(key, val)
 }

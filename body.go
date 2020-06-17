@@ -4,11 +4,11 @@ import "io"
 
 type body struct {
 	Element
-	Children []HtmlElement
 }
 
 func Body(attrs ...func(HtmlElement)) HtmlElement {
 	b := &body{}
+	b.Element.tag = "body"
 	for _, attr := range attrs {
 		attr(b)
 	}
@@ -16,16 +16,12 @@ func Body(attrs ...func(HtmlElement)) HtmlElement {
 }
 
 func (a *body) Render(w io.Writer) (int, error) {
-	return a.Element.Render(w, "body", a.Children)
+	return a.Element.Render(w, "body", a.Element.children)
 }
 
 func (b *body) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		b.Children = append(b.Children, element)
+		b.Element.children = append(b.Element.children, element)
 	}
 	return b
-}
-
-func (b *body) addAttribute(key string, val string) {
-	b.Element.AddAttribute(key, val)
 }
