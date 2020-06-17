@@ -187,7 +187,6 @@ func runBenchmarkCasesFast(b *testing.B, cases []HTMLTestCase) {
 */
 func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, htmlTestCases)
-	runBenchmarkCases(b, headingTestCases)
 	runBenchmarkCases(b, tagsTestCases)
 	runBenchmarkCases(b, headerfooterTestCases)
 	runBenchmarkCases(b, divspanTestCases)
@@ -197,7 +196,6 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, kitchenSinkTestCases)
 
 	/*	runBenchmarkCasesFast(b,htmlTestCases)
-		runBenchmarkCasesFast(b, headingTestCases)
 		runBenchmarkCasesFast(b, tagsTestCases)
 		runBenchmarkCasesFast(b, headerfooterTestCases)
 		runBenchmarkCasesFast(b, divspanTestCases)
