@@ -1,10 +1,7 @@
 package html
 
-import "io"
-
 type div struct {
 	Element
-	Children []HtmlElement
 }
 
 func Div(attrs ...func(HtmlElement)) HtmlElement {
@@ -16,20 +13,15 @@ func Div(attrs ...func(HtmlElement)) HtmlElement {
 	return b
 }
 
-func (d *div) Render(w io.Writer) (int, error) {
-	return d.Element.Render(w, "div", d.Children)
-}
-
 func (d *div) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		d.Children = append(d.Children, element)
+		d.children = append(d.children, element)
 	}
 	return d
 }
 
 type span struct {
 	Element
-	Children []HtmlElement
 }
 
 func Span(attrs ...func(HtmlElement)) HtmlElement {
@@ -41,13 +33,9 @@ func Span(attrs ...func(HtmlElement)) HtmlElement {
 	return b
 }
 
-func (s *span) Render(w io.Writer) (int, error) {
-	return s.Element.Render(w, "span", s.Children)
-}
-
 func (s *span) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		s.Children = append(s.Children, element)
+		s.children = append(s.children, element)
 	}
 	return s
 }

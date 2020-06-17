@@ -1,10 +1,7 @@
 package html
 
-import "io"
-
 type unorderedlist struct {
 	Element
-	Children []HtmlElement
 }
 
 func Ul(attrs ...func(HtmlElement)) HtmlElement {
@@ -16,20 +13,15 @@ func Ul(attrs ...func(HtmlElement)) HtmlElement {
 	return ul
 }
 
-func (u *unorderedlist) Render(w io.Writer) (int, error) {
-	return u.Element.Render(w, "ul", u.Children)
-}
-
 func (u *unorderedlist) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		u.Children = append(u.Children, element)
+		u.children = append(u.children, element)
 	}
 	return u
 }
 
 type orderedlist struct {
 	Element
-	Children []HtmlElement
 }
 
 func Ol(attrs ...func(HtmlElement)) HtmlElement {
@@ -41,20 +33,15 @@ func Ol(attrs ...func(HtmlElement)) HtmlElement {
 	return ul
 }
 
-func (u *orderedlist) Render(w io.Writer) (int, error) {
-	return u.Element.Render(w, "ol", u.Children)
-}
-
 func (u *orderedlist) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		u.Children = append(u.Children, element)
+		u.children = append(u.children, element)
 	}
 	return u
 }
 
 type listitem struct {
 	Element
-	Children []HtmlElement
 }
 
 func Li(attrs ...func(HtmlElement)) HtmlElement {
@@ -66,20 +53,15 @@ func Li(attrs ...func(HtmlElement)) HtmlElement {
 	return li
 }
 
-func (l *listitem) Render(w io.Writer) (int, error) {
-	return l.Element.Render(w, "li", l.Children)
-}
-
 func (l *listitem) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		l.Children = append(l.Children, element)
+		l.children = append(l.children, element)
 	}
 	return l
 }
 
 type dl struct {
 	Element
-	Children []HtmlElement
 }
 
 func Dl(attrs ...func(HtmlElement)) HtmlElement {
@@ -91,20 +73,15 @@ func Dl(attrs ...func(HtmlElement)) HtmlElement {
 	return f
 }
 
-func (a *dl) Render(w io.Writer) (int, error) {
-	return a.Element.Render(w, "dl", a.Children)
-}
-
 func (a *dl) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		a.Children = append(a.Children, element)
+		a.children = append(a.children, element)
 	}
 	return a
 }
 
 type dt struct {
 	Element
-	Children []HtmlElement
 }
 
 func Dt(attrs ...func(HtmlElement)) HtmlElement {
@@ -116,20 +93,15 @@ func Dt(attrs ...func(HtmlElement)) HtmlElement {
 	return f
 }
 
-func (a *dt) Render(w io.Writer) (int, error) {
-	return a.Element.Render(w, "dt", a.Children)
-}
-
 func (a *dt) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		a.Children = append(a.Children, element)
+		a.children = append(a.children, element)
 	}
 	return a
 }
 
 type dd struct {
 	Element
-	Children []HtmlElement
 }
 
 func Dd(attrs ...func(HtmlElement)) HtmlElement {
@@ -141,13 +113,9 @@ func Dd(attrs ...func(HtmlElement)) HtmlElement {
 	return f
 }
 
-func (a *dd) Render(w io.Writer) (int, error) {
-	return a.Element.Render(w, "dd", a.Children)
-}
-
 func (a *dd) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		a.Children = append(a.Children, element)
+		a.children = append(a.children, element)
 	}
 	return a
 }

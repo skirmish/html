@@ -1,7 +1,5 @@
 package html
 
-import "io"
-
 type body struct {
 	Element
 }
@@ -15,13 +13,9 @@ func Body(attrs ...func(HtmlElement)) HtmlElement {
 	return b
 }
 
-func (a *body) Render(w io.Writer) (int, error) {
-	return a.Element.Render(w, "body", a.Element.children)
-}
-
 func (b *body) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
-		b.Element.children = append(b.Element.children, element)
+		b.children = append(b.children, element)
 	}
 	return b
 }

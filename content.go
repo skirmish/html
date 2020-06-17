@@ -21,7 +21,3 @@ func (c *content) Render(w io.Writer) (int, error) {
 func (c *content) AddElements(elements ...HtmlElement) HtmlElement {
 	return c
 }
-
-func (c *content) addAttribute(key string, val string) {
-	//c.Element.AddAttribute(key, val)
-}

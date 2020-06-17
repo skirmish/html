@@ -91,7 +91,11 @@ func (e Element) RenderAttr(w io.Writer) (int, error) {
 	return n, err
 }
 
-func (a *Element) Render(w io.Writer, tag string, children []HtmlElement) (int, error) {
+func (e *Element) Render(w io.Writer) (int, error) {
+	return e.RenderElement(w, e.tag, e.children)
+}
+
+func (a *Element) RenderElement(w io.Writer, tag string, children []HtmlElement) (int, error) {
 	n, err := w.Write([]byte("<"))
 	if err != nil {
 		return n, err
@@ -128,7 +132,7 @@ func (a *Element) Render(w io.Writer, tag string, children []HtmlElement) (int, 
 		n += o
 	}
 
-	// Render end
+	// RenderElement end
 	o, err = w.Write([]byte("</"))
 	if err != nil {
 		return n, err
@@ -153,7 +157,7 @@ func (a *Element) FastRender(w io.Writer, tag string, children []HtmlElement) (i
 	if len(a.childData) == 0 {
 		// Record the rendering into childata.
 		buf := new(bytes.Buffer)
-		_, err := a.Render(buf, tag, children)
+		_, err := a.RenderElement(buf, tag, children)
 		if err != nil {
 			return 0, err
 		}
