@@ -2,7 +2,6 @@ package html
 
 import "fmt"
 
-// base, bdi, bdo,
 // cite, code, data, datalist, del, ins, dfn, dialog,
 // em, hr, i, kbd, link, noscript, object, param, pre, progress,
 // q, rp, rt, ruby, s, samp, small, strong, sub, sup, template, track, tt, u, var, wbr
@@ -67,6 +66,46 @@ func (b *b) AddElements(elements ...HtmlElement) HtmlElement {
 	return b
 }
 
+type bdi struct {
+	Element
+}
+
+func Bdi(attrs ...func(HtmlElement)) HtmlElement {
+	f := &b{}
+	f.tag = "bdi"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (b *bdi) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		b.children = append(b.children, element)
+	}
+	return b
+}
+
+type bdo struct {
+	Element
+}
+
+func Bdo(attrs ...func(HtmlElement)) HtmlElement {
+	f := &b{}
+	f.tag = "bdo"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (b *bdo) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		b.children = append(b.children, element)
+	}
+	return b
+}
+
 type blockquote struct {
 	Element
 }
@@ -105,6 +144,26 @@ func (a *br) AddElements(elements ...HtmlElement) HtmlElement {
 	//	for _, element := range elements {
 	//		a.children = append(a.children, element)
 	//	}
+	return a
+}
+
+type cite struct {
+	Element
+}
+
+func Cite(attrs ...func(HtmlElement)) HtmlElement {
+	f := &cite{}
+	f.tag = "cite"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (a *cite) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		a.children = append(a.children, element)
+	}
 	return a
 }
 

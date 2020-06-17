@@ -76,6 +76,24 @@ func (m *meta) AddElements(elements ...HtmlElement) HtmlElement {
 	return m
 }
 
+type base struct {
+	Element
+}
+
+func Base(attrs ...func(HtmlElement)) HtmlElement {
+	m := &base{}
+	m.tag = "base"
+	m.empty = true
+	for _, attr := range attrs {
+		attr(m)
+	}
+	return m
+}
+
+func (m *base) AddElements(elements ...HtmlElement) HtmlElement {
+	return m
+}
+
 type title struct {
 	Element
 }

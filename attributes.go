@@ -206,6 +206,13 @@ func Value(value string) func(HtmlElement) {
 	}
 }
 
+// Dir - bdo
+func Dir(dir string) func(HtmlElement) {
+	return func(i HtmlElement) {
+		i.AddAttribute("dir", dir)
+	}
+}
+
 /* Meter Attributes
 Attribute	Value	Description
 form	form_id	Specifies which form the <meter> element belongs to

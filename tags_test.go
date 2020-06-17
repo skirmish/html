@@ -8,6 +8,20 @@ import (
 
 var tagsTestCases = []HTMLTestCase{
 	{
+		name:   "abbr",
+		output: "<p>The <abbr class=\"a\" title=\"abbrevaited text\">some</abbr> what</p>",
+		element: P().AddElements(
+			Content("The "),
+			Abbr(Class("a"), TitleAttr("abbrevaited text")).AddElements(Content("some")),
+			Content(" what"),
+		),
+	},
+	{
+		name:    "address",
+		output:  "<address class=\"a\">The North Pole</address>",
+		element: Address(Class("a")).AddElements(Content("The North Pole")),
+	},
+	{
 		name:    "b",
 		output:  "<b/>",
 		element: B(),
@@ -26,6 +40,16 @@ var tagsTestCases = []HTMLTestCase{
 		name:    "b with content and class",
 		output:  "<br class=\"name\">",
 		element: Br(Class("name")).AddElements(Content("something")),
+	},
+	{
+		name:    "bdi",
+		output:  "<bdi class=\"b\">name</bdi>",
+		element: Bdi(Class("b")).AddElements(Content("name")),
+	},
+	{
+		name:    "bdo",
+		output:  "<bdo dir=\"rtl\">wrong way</bdo>",
+		element: Bdo(Dir("rtl")).AddElements(Content("wrong way")),
 	},
 	{
 		name:    "Heading 1",
