@@ -103,16 +103,6 @@ var htmlTestCases = []HTMLTestCase{
 		element: Html().AddElements(Head(), Body()),
 	},
 	{
-		name:    "image",
-		output:  "<img/>",
-		element: Img(),
-	},
-	{
-		name:    "image with src",
-		output:  "<img src=\"asource\"/>",
-		element: Img(Src("asource")),
-	},
-	{
 		name:    "script",
 		output:  "<script/>",
 		element: Script(),
@@ -186,7 +176,7 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, headerfooterTestCases)
 	runBenchmarkCases(b, divspanTestCases)
 	runBenchmarkCases(b, brTestCases)
-	runBenchmarkCases(b, canvasTestCases)
+	runBenchmarkCases(b, mediaTestCases)
 	runBenchmarkCases(b, listTestCases)
 	runBenchmarkCases(b, tableTestCases)
 	runBenchmarkCases(b, kitchenSinkTestCases)

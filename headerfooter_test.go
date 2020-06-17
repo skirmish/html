@@ -71,6 +71,35 @@ var headerfooterTestCases = []HTMLTestCase{
 		output:  "<article class=\"name\">something</article>",
 		element: Article(Class("name")).AddElements(Content("something")),
 	},
+	{
+		name:   "details with content, summary and class",
+		output: "<details class=\"name\"><summary class=\"name\">something</summary><p>something</p></details>",
+		element: Details(Class("name")).AddElements(
+			Summary(Class("name")).AddElements(Content("something")),
+			P().AddElements(Content("something")),
+		),
+	},
+	{
+		name:    "main with content and class",
+		output:  "<main class=\"name\">something</main>",
+		element: Main(Class("name")).AddElements(Content("something")),
+	},
+	{
+		name:   "mark with content and class",
+		output: "<p class=\"name\"><mark class=\"id\">something</mark></p>",
+		element: P(Class("name")).AddElements(
+			Mark(Class("id")).AddElements(Content("something")),
+		),
+	},
+	{
+		name:   "time with content and class",
+		output: "<p class=\"name\">some part should be done by<time id=\"id1\">10:00pm</time>, probably.</p>",
+		element: P(Class("name")).AddElements(
+			Content("some part should be done by"),
+			Time(Id("id1")).AddElements(Content("10:00pm")),
+			Content(", probably."),
+		),
+	},
 }
 
 func Test_HeaderFooterGeneration(t *testing.T) {

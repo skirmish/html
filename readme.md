@@ -62,7 +62,15 @@ faster will happen.
 
 All valid html5 tags *want* to be implemented, but for now it's driven by the ones currently in use. 
 
-HTML Tags
+TODO:
+ * Add Validation
+ * Add all valid html5 elements
+ * Add Variables & Conditionals
+ * Optimize
+ * Test
+ * Add CSS
+
+HTML Tags (* means implemented)
 ```
 *<!DOCTYPE>
 *<a>
