@@ -2,8 +2,8 @@ package html
 
 import "fmt"
 
-// cite, code, data, datalist, del, ins, dfn, dialog,
-// em, hr, i, kbd, link, noscript, object, param, pre, progress,
+// data, datalist, del, dfn, dialog,
+// em, hr, i, ins, kbd, link, noscript, object, param, pre, progress,
 // q, rp, rt, ruby, s, samp, small, strong, sub, sup, template, track, tt, u, var, wbr
 
 type abbr struct {
@@ -161,6 +161,126 @@ func Cite(attrs ...func(HtmlElement)) HtmlElement {
 }
 
 func (a *cite) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		a.children = append(a.children, element)
+	}
+	return a
+}
+
+type code struct {
+	Element
+}
+
+func Code(attrs ...func(HtmlElement)) HtmlElement {
+	f := &code{}
+	f.tag = "code"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (a *code) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		a.children = append(a.children, element)
+	}
+	return a
+}
+
+type data struct {
+	Element
+}
+
+func Data(attrs ...func(HtmlElement)) HtmlElement {
+	f := &data{}
+	f.tag = "data"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (a *data) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		a.children = append(a.children, element)
+	}
+	return a
+}
+
+type datalist struct {
+	Element
+}
+
+func DataList(attrs ...func(HtmlElement)) HtmlElement {
+	f := &datalist{}
+	f.tag = "datalist"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (a *datalist) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		a.children = append(a.children, element)
+	}
+	return a
+}
+
+type del struct {
+	Element
+}
+
+func Del(attrs ...func(HtmlElement)) HtmlElement {
+	f := &del{}
+	f.tag = "del"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (a *del) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		a.children = append(a.children, element)
+	}
+	return a
+}
+
+type dfn struct {
+	Element
+}
+
+func Dfn(attrs ...func(HtmlElement)) HtmlElement {
+	f := &code{}
+	f.tag = "dfn"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (a *dfn) AddElements(elements ...HtmlElement) HtmlElement {
+	for _, element := range elements {
+		a.children = append(a.children, element)
+	}
+	return a
+}
+
+type dialog struct {
+	Element
+}
+
+func Dialog(attrs ...func(HtmlElement)) HtmlElement {
+	f := &dialog{}
+	f.tag = "dialog"
+	for _, attr := range attrs {
+		attr(f)
+	}
+	return f
+}
+
+func (a *dialog) AddElements(elements ...HtmlElement) HtmlElement {
 	for _, element := range elements {
 		a.children = append(a.children, element)
 	}

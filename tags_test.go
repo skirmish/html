@@ -52,6 +52,30 @@ var tagsTestCases = []HTMLTestCase{
 		element: Bdo(Dir("rtl")).AddElements(Content("wrong way")),
 	},
 	{
+		name:   "cite",
+		output: "<p><cite class=\"c\">data</cite> the wrong way</p>",
+		element: P().AddElements(
+			Cite(Class("c")).AddElements(Content("data")),
+			Content(" the wrong way"),
+		),
+	},
+	{
+		name:   "code",
+		output: "<p><code class=\"c\">data</code> another way</p>",
+		element: P().AddElements(
+			Code(Class("c")).AddElements(Content("data")),
+			Content(" another way"),
+		),
+	},
+	{
+		name:   "data",
+		output: "<p><code class=\"c\">data</code> another way</p>",
+		element: Ul().AddElements(
+			Code(Class("c")).AddElements(Content("data")),
+			Content(" another way"),
+		),
+	},
+	{
 		name:    "Heading 1",
 		output:  "<h1>TestContent</h1>",
 		element: Heading(Level(1)).AddElements(Content("TestContent")),
