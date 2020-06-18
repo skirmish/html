@@ -51,10 +51,11 @@ var mediaTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "video with source",
-		output: "<video class=\"v\"><source src=\"something.mp4\" type=\"video/mp4\"><source src=\"something.ogg\" type=\"video/ogg\">video not supported</video>",
+		output: "<video class=\"v\"><source src=\"something.mp4\" type=\"video/mp4\"><source src=\"something.ogg\" type=\"video/ogg\"><track src=\"subtitles_en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English\">video not supported</video>",
 		element: Video(Class("v")).AddElements(
 			Source(Src("something.mp4"), Type("video/mp4")),
 			Source(Src("something.ogg"), Type("video/ogg")),
+			Track(Src("subtitles_en.vtt"), Kind("subtitles"), SrcLang("en"), LabelAttr("English")),
 			Content("video not supported"),
 		),
 	},
@@ -87,6 +88,11 @@ var mediaTestCases = []HTMLTestCase{
 		element: Svg(Class("l")).AddElements(
 			Content("<circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"blue\" stroke-width=\"4\" fill=\"yellow\" />"),
 		),
+	},
+	{
+		name:    "link",
+		output:  "<link rel=\"stylesheet\" href=\"styling.css\">",
+		element: Link(Rel("stylesheet"), Href("styling.css")),
 	},
 }
 

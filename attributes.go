@@ -220,6 +220,27 @@ func Rel(dir string) func(Element) {
 	}
 }
 
+// Kind - track
+func Kind(dir string) func(Element) {
+	return func(i Element) {
+		i.AddAttribute("kind", dir)
+	}
+}
+
+// SrcLang - track
+func SrcLang(dir string) func(Element) {
+	return func(i Element) {
+		i.AddAttribute("srclang", dir)
+	}
+}
+
+// LabelAttr - track
+func LabelAttr(dir string) func(Element) {
+	return func(i Element) {
+		i.AddAttribute("label", dir)
+	}
+}
+
 /* Meter Attributes
 Attribute	Value	Description
 form	form_id	Specifies which form the <meter> element belongs to
