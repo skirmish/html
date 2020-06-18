@@ -38,8 +38,8 @@ var tagsTestCases = []HTMLTestCase{
 	},
 	{
 		name:    "b with content and class",
-		output:  "<br class=\"name\">",
-		element: Br(Class("name")).AddElements(Content("something")),
+		output:  "<b class=\"name\">something</b>",
+		element: B(Class("name")).AddElements(Content("something")),
 	},
 	{
 		name:    "bdi",
@@ -69,10 +69,42 @@ var tagsTestCases = []HTMLTestCase{
 	},
 	{
 		name:   "data",
-		output: "<p><code class=\"c\">data</code> another way</p>",
+		output: "<ul><li><data value=\"1\">one</data></li><li><data value=\"2\">two</data></li></ul>",
 		element: Ul().AddElements(
-			Code(Class("c")).AddElements(Content("data")),
-			Content(" another way"),
+			Li().AddElements(
+				Data(Value("1")).AddElements(Content("one")),
+			),
+			Li().AddElements(
+				Data(Value("2")).AddElements(Content("two")),
+			),
+		),
+	},
+	{
+		name:   "datalist",
+		output: "<datalist class=\"a1\"><option value=\"One\"/><option value=\"two\"/></datalist>",
+		element: DataList(Class("a1")).AddElements(
+			Option(Value("One")),
+			Option(Value("two")),
+		),
+	},
+	{
+		name:    "del",
+		output:  "<del>delete</del>",
+		element: Del().AddElements(Content("delete")),
+	},
+	{
+		name:   "dfn",
+		output: "<p><dfn>something</dfn> is not nothing</p>",
+		element: P().AddElements(
+			Dfn().AddElements(Content("something")),
+			Content(" is not nothing"),
+		),
+	},
+	{
+		name:   "dialog",
+		output: "<dialog><p>this is a dialog</p></dialog>",
+		element: Dialog().AddElements(
+			P().AddElements(Content("this is a dialog")),
 		),
 	},
 	{

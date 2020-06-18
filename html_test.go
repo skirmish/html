@@ -9,7 +9,7 @@ import (
 type HTMLTestCase struct {
 	name    string
 	output  string
-	element HtmlElement
+	element Element
 }
 
 var htmlTestCases = []HTMLTestCase{
