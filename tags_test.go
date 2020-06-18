@@ -281,6 +281,25 @@ var tagsTestCases = []HTMLTestCase{
 		output:  "<template><p>templated section</p></template>",
 		element: Template().AddElements(P().AddElements(Content("templated section"))),
 	},
+	{
+		name:    "u",
+		output:  "<u>underlined</u>",
+		element: U().AddElements(Content("underlined")),
+	},
+	{
+		name:    "var",
+		output:  "<var>x</var>",
+		element: Var().AddElements(Content("x")),
+	},
+	{
+		name:   "wbr",
+		output: "<p>word<wbr>break</p>",
+		element: P().AddElements(
+			Content("word"),
+			Wbr(),
+			Content("break"),
+		),
+	},
 }
 
 func Test_TagGeneration(t *testing.T) {

@@ -180,5 +180,5 @@ func Var(attrs ...func(Element)) Element {
 }
 
 func Wbr(attrs ...func(Element)) Element {
-	return (&tag{tag: "wbr"}).addAttrs(attrs...)
+	return (&tag{tag: "wbr", empty: true}).addAttrs(attrs...)
 }

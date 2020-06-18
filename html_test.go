@@ -49,6 +49,11 @@ var htmlTestCases = []HTMLTestCase{
 		element: Body(Class("name")).AddElements(Content("content")),
 	},
 	{
+		name:    "base",
+		output:  "<base href=\"http://example.com\" target=\"_blank\">",
+		element: Base(Href("http://example.com"), Target("_blank")),
+	},
+	{
 		name:    "form",
 		output:  "<form/>",
 		element: Form(),

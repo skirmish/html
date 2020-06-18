@@ -20,37 +20,25 @@ package html
 //translate	Specifies whether the content of an element should be translated or not
 
 func AccessKey(accesskey string) func(e Element) {
-	return func(e Element) {
-		e.AddAttribute("accesskey", accesskey)
-	}
+	return func(e Element) { e.AddAttribute("accesskey", accesskey) }
 }
 
 func Class(class string) func(e Element) {
-	return func(e Element) {
-		e.AddAttribute("class", class)
-	}
+	return func(e Element) { e.AddAttribute("class", class) }
 }
 
 func Hidden(hidden string) func(e Element) {
-	return func(e Element) {
-		e.AddAttribute("hidden", hidden)
-	}
+	return func(e Element) { e.AddAttribute("hidden", hidden) }
 }
 
 func Id(id string) func(element Element) {
-	return func(element Element) {
-		element.AddAttribute("id", id)
-	}
+	return func(element Element) { element.AddAttribute("id", id) }
 }
 
 func Lang(lang string) func(element Element) {
-	return func(element Element) {
-		element.AddAttribute("lang", lang)
-	}
+	return func(element Element) { element.AddAttribute("lang", lang) }
 }
 
 func TitleAttr(title string) func(element Element) {
-	return func(element Element) {
-		element.AddAttribute("title", title)
-	}
+	return func(element Element) { element.AddAttribute("title", title) }
 }
