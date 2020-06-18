@@ -50,6 +50,10 @@ Elements currently supported (absolute bare minimum):
  * a
  * ul
  * li
+ * div
+ * span
+ * header
+ * footer
  
 
 Notes:
@@ -57,3 +61,121 @@ This is not optimized yet, first we'll work on correctness, then once it's fairl
 faster will happen.
 
 All valid html5 tags *want* to be implemented, but for now it's driven by the ones currently in use. 
+
+TODO:
+ * Add Validation
+ * Add all valid html5 elements
+ * Add Variables & Conditionals
+ * Optimize
+ * Test
+ * Add CSS
+
+HTML Tags (* means implemented)
+```
+*<!DOCTYPE>
+*<a>
+<abbr>
+<address>
+<area>
+*<article>
+*<aside>
+<audio>
+*<b>
+<base>
+<bdi>
+<bdo>
+*<blockquote>
+*<body>
+*<br>
+*<button>
+*<canvas>
+*<caption>
+<cite>
+<code>
+*<col>
+*<colgroup>
+<data>
+<datalist>
+*<dd>
+<del>
+<details>
+<dfn>
+<dialog>
+*<div>
+*<dl>
+*<dt>
+<em>
+<embed>
+*<fieldset>
+*<figcaption>
+*<figure>
+*<footer>
+*<form>
+*<h1> - <h6>
+*<head>
+*<header>
+<hr>
+*<html>
+<i>
+<iframe>
+*<img>
+*<input>
+<ins>
+<kbd>
+*<label>
+<legend>
+*<li>
+<link>
+*<main>
+<map>
+*<mark>
+*<meta>
+*<meter>
+*<nav>
+<noscript>
+<object>
+*<ol>
+*<optgroup>
+*<option>
+*<output>
+*<p>
+<param>
+<picture>
+<pre>
+<progress>
+<q>
+<rp>
+<rt>
+<ruby>
+<s>
+<samp>
+*<script>
+*<section>
+*<select>
+<small>
+<source>
+*<span>
+<strong>
+*<style>
+<sub>
+*<summary>
+<sup>
+<svg>
+*<table>
+*<tbody>
+*<td>
+<template>
+*<textarea>
+*<tfoot>
+*<th>
+*<thead>
+*<time>
+*<title>
+*<tr>
+<track>
+<u>
+*<ul>
+<var>
+<video>
+<wbr>
+```

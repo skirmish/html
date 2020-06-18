@@ -1,31 +1,34 @@
 package html
 
-import "io"
-
-func Html(attrs ...func(HtmlElement)) HtmlElement {
-	h := &html{}
-	for _, attr := range attrs {
-		attr(h)
-	}
-	return h
+func DocType() Element {
+	return &rawData{content: "<!DOCTYPE html>\n"}
 }
 
-type html struct {
-	Element
-	Children []HtmlElement
+func Html(attrs ...func(Element)) Element {
+	return (&tag{tag: "html"}).addAttrs(attrs...)
 }
 
-func (a *html) Render(w io.Writer) (int, error) {
-	return a.Element.Render(w, "html", a.Children)
+func Head(attrs ...func(Element)) Element {
+	return (&tag{tag: "head"}).addAttrs(attrs...)
 }
 
-func (h *html) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		h.Children = append(h.Children, element)
-	}
-	return h
+func Meta(attrs ...func(Element)) Element {
+	return (&tag{tag: "meta", empty: true}).addAttrs(attrs...)
 }
 
-func (h *html) addAttribute(key string, val string) {
-	h.Element.AddAttribute(key, val)
+func Base(attrs ...func(Element)) Element {
+	return (&tag{tag: "base", empty: true}).addAttrs(attrs...)
+}
+
+func Title(attrs ...func(Element)) Element {
+	return (&tag{tag: "title"}).addAttrs(attrs...)
+}
+
+func Body(attrs ...func(Element)) Element {
+	return (&tag{tag: "body"}).addAttrs(attrs...)
+}
+
+// Content adds raw content to the stream.
+func Content(data string) Element {
+	return &rawData{content: data}
 }
