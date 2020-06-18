@@ -47,3 +47,7 @@ func Map(attrs ...func(Element)) Element {
 func Source(attrs ...func(Element)) Element {
 	return (&tag{tag: "source", empty: true}).addAttrs(attrs...)
 }
+
+func Link(attrs ...func(Element)) Element {
+	return (&tag{tag: "link", empty: true}).addAttrs(attrs...)
+}
