@@ -23,78 +23,78 @@ var attributes []attribute = []attribute{
 }
 
 // Name - Attribute for form
-func Name(name string) func(HtmlElement) {
-	return func(f HtmlElement) {
+func Name(name string) func(Element) {
+	return func(f Element) {
 		f.AddAttribute("name", name)
 	}
 }
 
 // Src - for image
-func Src(source string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Src(source string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("src", source)
 	}
 }
 
 // Href - for image
-func Href(href string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Href(href string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("href", href)
 	}
 }
 
 // UseMap - for image
-func UseMap(usemap string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func UseMap(usemap string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("usemap", usemap)
 	}
 }
 
 // Shape - for area
-func Shape(shape string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Shape(shape string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("shape", shape)
 	}
 }
 
 // Coords - for area
-func Coords(coords string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Coords(coords string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("coords", coords)
 	}
 }
 
 // Charset - for meta
-func Charset(charset string) func(HtmlElement) {
-	return func(m HtmlElement) {
+func Charset(charset string) func(Element) {
+	return func(m Element) {
 		m.AddAttribute("charset", charset)
 	}
 }
 
 // SrcSet - for Source
-func SrcSet(srcset string) func(HtmlElement) {
-	return func(m HtmlElement) {
+func SrcSet(srcset string) func(Element) {
+	return func(m Element) {
 		m.AddAttribute("srcset", srcset)
 	}
 }
 
 // Media - for source
-func Media(media string) func(HtmlElement) {
-	return func(m HtmlElement) {
+func Media(media string) func(Element) {
+	return func(m Element) {
 		m.AddAttribute("media", media)
 	}
 }
 
 // Type - script/style
-func Type(t string) func(HtmlElement) {
-	return func(m HtmlElement) {
+func Type(t string) func(Element) {
+	return func(m Element) {
 		m.AddAttribute("type", t)
 	}
 }
 
 // ContentAttr - meta
-func ContentAttr(t string) func(HtmlElement) {
-	return func(m HtmlElement) {
+func ContentAttr(t string) func(Element) {
+	return func(m Element) {
 		m.AddAttribute("content", t)
 	}
 }
@@ -158,58 +158,65 @@ onselect	script	Fires after some text has been selected in an element
 onsubmit	script	Fires when a form is submitted*/
 
 // FormId - meter
-func FormId(formid string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func FormId(formid string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("form", formid)
 	}
 }
 
 // High - meter
-func High(high string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func High(high string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("high", high)
 	}
 }
 
 // Low - meter
-func Low(low string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Low(low string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("low", low)
 	}
 }
 
 // Max - meter
-func Max(max string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Max(max string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("max", max)
 	}
 }
 
 // Min - meter
-func Min(min string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Min(min string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("min", min)
 	}
 }
 
 // Optimum - meter
-func Optimum(optimum string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Optimum(optimum string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("optimum", optimum)
 	}
 }
 
 // Value - meter
-func Value(value string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Value(value string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("value", value)
 	}
 }
 
 // Dir - bdo
-func Dir(dir string) func(HtmlElement) {
-	return func(i HtmlElement) {
+func Dir(dir string) func(Element) {
+	return func(i Element) {
 		i.AddAttribute("dir", dir)
+	}
+}
+
+// Rel - bdo
+func Rel(dir string) func(Element) {
+	return func(i Element) {
+		i.AddAttribute("rel", dir)
 	}
 }
 

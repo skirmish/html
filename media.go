@@ -1,232 +1,53 @@
 package html
 
-type canvas struct {
-	Element
+func Canvas(attrs ...func(Element)) Element {
+	return (&tag{tag: "canvas"}).addAttrs(attrs...)
 }
 
-func Canvas(attrs ...func(HtmlElement)) HtmlElement {
-	i := &canvas{}
-	i.tag = "canvas"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
+func Img(attrs ...func(Element)) Element {
+	return (&tag{tag: "img", empty: true}).addAttrs(attrs...)
 }
 
-func (i *canvas) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
+func Figure(attrs ...func(Element)) Element {
+	return (&tag{tag: "figure"}).addAttrs(attrs...)
 }
 
-type image struct {
-	Element
+func FigCaption(attrs ...func(Element)) Element {
+	return (&tag{tag: "figcaption"}).addAttrs(attrs...)
 }
 
-func Img(attrs ...func(HtmlElement)) HtmlElement {
-	i := &image{}
-	i.tag = "img"
-	i.empty = true
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
+func Audio(attrs ...func(Element)) Element {
+	return (&tag{tag: "audio"}).addAttrs(attrs...)
 }
 
-func (i *image) AddElements(elements ...HtmlElement) HtmlElement {
-	return i
+func Embed(attrs ...func(Element)) Element {
+	return (&tag{tag: "embed"}).addAttrs(attrs...)
 }
 
-type figure struct {
-	Element
+func Video(attrs ...func(Element)) Element {
+	return (&tag{tag: "video"}).addAttrs(attrs...)
 }
 
-func Figure(attrs ...func(HtmlElement)) HtmlElement {
-	i := &figure{}
-	i.tag = "figure"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
+func Picture(attrs ...func(Element)) Element {
+	return (&tag{tag: "picture"}).addAttrs(attrs...)
 }
 
-func (i *figure) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
+func Svg(attrs ...func(Element)) Element {
+	return (&tag{tag: "svg"}).addAttrs(attrs...)
 }
 
-type figcaption struct {
-	Element
+func Area(attrs ...func(Element)) Element {
+	return (&tag{tag: "area", empty: true}).addAttrs(attrs...)
 }
 
-func FigCaption(attrs ...func(HtmlElement)) HtmlElement {
-	i := &figcaption{}
-	i.tag = "figcaption"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
+func Map(attrs ...func(Element)) Element {
+	return (&tag{tag: "map"}).addAttrs(attrs...)
 }
 
-func (i *figcaption) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
+func Source(attrs ...func(Element)) Element {
+	return (&tag{tag: "source", empty: true}).addAttrs(attrs...)
 }
 
-type audio struct {
-	Element
-}
-
-func Audio(attrs ...func(HtmlElement)) HtmlElement {
-	i := &audio{}
-	i.tag = "audio"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *audio) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
-}
-
-type embed struct {
-	Element
-}
-
-func Embed(attrs ...func(HtmlElement)) HtmlElement {
-	i := &embed{}
-	i.tag = "embed"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *embed) AddElements(elements ...HtmlElement) HtmlElement {
-	return i
-}
-
-type video struct {
-	Element
-}
-
-func Video(attrs ...func(HtmlElement)) HtmlElement {
-	i := &video{}
-	i.tag = "video"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *video) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
-}
-
-type picture struct {
-	Element
-}
-
-func Picture(attrs ...func(HtmlElement)) HtmlElement {
-	i := &picture{}
-	i.tag = "picture"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *picture) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
-}
-
-type svg struct {
-	Element
-}
-
-func Svg(attrs ...func(HtmlElement)) HtmlElement {
-	i := &svg{}
-	i.tag = "svg"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *svg) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
-}
-
-type area struct {
-	Element
-}
-
-func Area(attrs ...func(HtmlElement)) HtmlElement {
-	i := &area{}
-	i.tag = "area"
-	i.empty = true
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *area) AddElements(elements ...HtmlElement) HtmlElement {
-	return i
-}
-
-type mapElement struct {
-	Element
-}
-
-func Map(attrs ...func(HtmlElement)) HtmlElement {
-	i := &mapElement{}
-	i.tag = "map"
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *mapElement) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		i.children = append(i.children, element)
-	}
-	return i
-}
-
-type source struct {
-	Element
-}
-
-func Source(attrs ...func(HtmlElement)) HtmlElement {
-	i := &source{}
-	i.tag = "source"
-	i.empty = true
-	for _, attr := range attrs {
-		attr(i)
-	}
-	return i
-}
-
-func (i *source) AddElements(elements ...HtmlElement) HtmlElement {
-	return i
+func Link(attrs ...func(Element)) Element {
+	return (&tag{tag: "link", empty: true}).addAttrs(attrs...)
 }

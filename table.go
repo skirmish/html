@@ -1,201 +1,41 @@
 package html
 
-type table struct {
-	Element
+func Table(attrs ...func(Element)) Element {
+	return (&tag{tag: "table"}).addAttrs(attrs...)
 }
 
-func Table(attrs ...func(HtmlElement)) HtmlElement {
-	f := &table{}
-	f.tag = "table"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
+func Tr(attrs ...func(Element)) Element {
+	return (&tag{tag: "tr"}).addAttrs(attrs...)
 }
 
-func (f *table) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
+func Th(attrs ...func(Element)) Element {
+	return (&tag{tag: "th"}).addAttrs(attrs...)
 }
 
-type tr struct {
-	Element
+func Td(attrs ...func(Element)) Element {
+	return (&tag{tag: "td"}).addAttrs(attrs...)
 }
 
-func Tr(attrs ...func(HtmlElement)) HtmlElement {
-	f := &tr{}
-	f.tag = "tr"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
+func Caption(attrs ...func(Element)) Element {
+	return (&tag{tag: "caption"}).addAttrs(attrs...)
 }
 
-func (f *tr) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
+func Colgroup(attrs ...func(Element)) Element {
+	return (&tag{tag: "colgroup"}).addAttrs(attrs...)
 }
 
-type th struct {
-	Element
+func Col(attrs ...func(Element)) Element {
+	return (&tag{tag: "col"}).addAttrs(attrs...)
 }
 
-func Th(attrs ...func(HtmlElement)) HtmlElement {
-	f := &th{}
-	f.tag = "th"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
+func Thead(attrs ...func(Element)) Element {
+	return (&tag{tag: "thead"}).addAttrs(attrs...)
 }
 
-func (f *th) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
+func Tfoot(attrs ...func(Element)) Element {
+	return (&tag{tag: "tfoot"}).addAttrs(attrs...)
 }
 
-type td struct {
-	Element
-}
-
-func Td(attrs ...func(HtmlElement)) HtmlElement {
-	f := &td{}
-	f.tag = "td"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (f *td) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
-}
-
-type caption struct {
-	Element
-}
-
-func Caption(attrs ...func(HtmlElement)) HtmlElement {
-	f := &caption{}
-	f.tag = "caption"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (f *caption) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
-}
-
-type colgroup struct {
-	Element
-}
-
-func Colgroup(attrs ...func(HtmlElement)) HtmlElement {
-	f := &colgroup{}
-	f.tag = "colgroup"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (f *colgroup) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
-}
-
-type col struct {
-	Element
-}
-
-func Col(attrs ...func(HtmlElement)) HtmlElement {
-	f := &col{}
-	f.tag = "col"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (f *col) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
-}
-
-type thead struct {
-	Element
-}
-
-func Thead(attrs ...func(HtmlElement)) HtmlElement {
-	f := &thead{}
-	f.tag = "thead"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (f *thead) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
-}
-
-type tfoot struct {
-	Element
-}
-
-func Tfoot(attrs ...func(HtmlElement)) HtmlElement {
-	f := &tfoot{}
-	f.tag = "tfoot"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (f *tfoot) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
-}
-
-type tbody struct {
-	Element
-}
-
-func Tbody(attrs ...func(HtmlElement)) HtmlElement {
-	f := &tbody{}
-	f.tag = "tbody"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (f *tbody) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
+func Tbody(attrs ...func(Element)) Element {
+	return (&tag{tag: "tbody"}).addAttrs(attrs...)
 }

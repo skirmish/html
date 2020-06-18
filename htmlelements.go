@@ -1,11 +1,177 @@
 package html
 
 import (
-	"bytes"
 	"io"
 )
 
-type HtmlElement interface {
+type Element interface {
+	Render(w io.Writer) (n int, err error)
+	AddElements(elements ...Element) Element
+	AddAttribute(key string, val string)
+}
+
+type keyVal struct {
+	Key   string
+	Value string
+}
+
+func (kv *keyVal) getRenderSize() int {
+	size := 3 // account for =""
+	size += len(kv.Key)
+	size += len(kv.Value)
+	return size
+}
+
+type tag struct {
+	tag        string    // the tag name
+	empty      bool      // Is it an empty tag e.g. <br>
+	level      int       // h1-h6
+	attributes []keyVal  // Attributes
+	children   []Element // Child elements
+}
+
+func (e *tag) addAttrs(attrs ...func(Element)) Element {
+	for _, attr := range attrs {
+		attr(e)
+	}
+	return e
+}
+
+func (e *tag) AddAttribute(key string, val string) {
+	e.attributes = append(e.attributes, keyVal{
+		Key:   key,
+		Value: val,
+	})
+}
+
+func (e *tag) AddElements(elements ...Element) Element {
+	for _, element := range elements {
+		e.children = append(e.children, element)
+	}
+	return e
+}
+
+func (e *tag) renderAttr(w io.Writer) (int, error) {
+	if len(e.attributes) == 0 {
+		return 0, nil
+	}
+	n, err := w.Write([]byte(" "))
+	if err != nil {
+		return n, err
+	}
+	for index, attr := range e.attributes {
+		o, err := w.Write([]byte(attr.Key))
+		if err != nil {
+			return n, err
+		}
+		n += o
+		o, err = w.Write([]byte("=\""))
+		if err != nil {
+			return n, err
+		}
+		n += o
+		o, err = w.Write([]byte(attr.Value))
+		if err != nil {
+			return n, err
+		}
+		n += o
+		o, err = w.Write([]byte("\""))
+		if err != nil {
+			return n, err
+		}
+		n += o
+		if index+1 < len(e.attributes) {
+			o, err = w.Write([]byte(" "))
+			if err != nil {
+				return n, err
+			}
+			n += o
+		}
+	}
+	return n, err
+}
+
+func (e *tag) Render(w io.Writer) (int, error) {
+	return e.renderElement(w, e.tag, e.children)
+}
+
+func (e *tag) renderElement(w io.Writer, tag string, children []Element) (int, error) {
+	n, err := w.Write([]byte("<"))
+	if err != nil {
+		return n, err
+	}
+	o, err := w.Write([]byte(tag))
+	if err != nil {
+		return n, err
+	}
+	n += o
+	o, err = e.renderAttr(w) // Attributes
+	if err != nil {
+		return n, err
+	}
+	n += o
+	if children == nil {
+		if e.empty {
+			o, err = w.Write([]byte(">"))
+			if err != nil {
+				return n, err
+			}
+			n += o
+			return n, err
+		} else {
+			o, err = w.Write([]byte("/>"))
+			if err != nil {
+				return n, err
+			}
+			n += o
+			return n, err
+		}
+	}
+	o, err = w.Write([]byte(">"))
+	if err != nil {
+		return n, err
+	}
+	n += o
+
+	for _, child := range children {
+		o, err = child.Render(w)
+		if err != nil {
+			return n, err
+		}
+		n += o
+	}
+
+	// RenderElement end
+	o, err = w.Write([]byte("</"))
+	if err != nil {
+		return n, err
+	}
+	n += o
+
+	o, err = w.Write([]byte(tag))
+	if err != nil {
+		return n, err
+	}
+	n += o
+	o, err = w.Write([]byte(">"))
+	if err != nil {
+		return n, err
+	}
+	n += o
+	return n, err
+}
+
+type rawData struct {
+	content string
+}
+
+func (e *rawData) AddElements(elements ...Element) Element { return e }
+
+func (e *rawData) AddAttribute(key string, val string) {}
+
+func (e *rawData) Render(w io.Writer) (int, error) { return w.Write([]byte(e.content)) }
+
+/*type HtmlElement interface {
 	Render(w io.Writer) (n int, err error)
 	AddElements(elements ...HtmlElement) HtmlElement
 	AddAttribute(key string, val string)
@@ -25,13 +191,7 @@ type KeyVal struct {
 	Value string
 }
 
-func (kv *KeyVal) getRenderSize() int {
-	size := 3 // account for =""
-	size += len(kv.Key)
-	size += len(kv.Value)
-	// key="value"
-	return size
-}
+
 
 type Element struct {
 	tag        string // the tag name
@@ -185,3 +345,4 @@ func (e *Element) getRenderSize() int {
 	}
 	return size
 }
+*/

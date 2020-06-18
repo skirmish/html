@@ -41,7 +41,7 @@ var kitchenSinkTestCases = []HTMLTestCase{
 }
 
 func Test_KitchenSink(t *testing.T) {
-	page := []HtmlElement{
+	page := []Element{
 		DocType(),
 		Html(Lang("en")).AddElements(
 			Head().AddElements(

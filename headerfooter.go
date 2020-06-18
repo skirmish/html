@@ -1,221 +1,45 @@
 package html
 
-type header struct {
-	Element
+func Header(attrs ...func(Element)) Element {
+	return (&tag{tag: "header"}).addAttrs(attrs...)
 }
 
-func Header(attrs ...func(HtmlElement)) HtmlElement {
-	b := &header{}
-	b.tag = "header"
-	for _, attr := range attrs {
-		attr(b)
-	}
-	return b
+func Footer(attrs ...func(Element)) Element {
+	return (&tag{tag: "footer"}).addAttrs(attrs...)
 }
 
-func (h *header) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		h.children = append(h.children, element)
-	}
-	return h
+func Article(attrs ...func(Element)) Element {
+	return (&tag{tag: "article"}).addAttrs(attrs...)
 }
 
-type footer struct {
-	Element
+func Aside(attrs ...func(Element)) Element {
+	return (&tag{tag: "aside"}).addAttrs(attrs...)
 }
 
-func Footer(attrs ...func(HtmlElement)) HtmlElement {
-	b := &footer{}
-	b.tag = "footer"
-	for _, attr := range attrs {
-		attr(b)
-	}
-	return b
+func Section(attrs ...func(Element)) Element {
+	return (&tag{tag: "section"}).addAttrs(attrs...)
 }
 
-func (f *footer) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		f.children = append(f.children, element)
-	}
-	return f
+func Nav(attrs ...func(Element)) Element {
+	return (&tag{tag: "nav"}).addAttrs(attrs...)
 }
 
-type article struct {
-	Element
+func Details(attrs ...func(Element)) Element {
+	return (&tag{tag: "details"}).addAttrs(attrs...)
 }
 
-func Article(attrs ...func(HtmlElement)) HtmlElement {
-	f := &article{}
-	f.tag = "article"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
+func Main(attrs ...func(Element)) Element {
+	return (&tag{tag: "main"}).addAttrs(attrs...)
 }
 
-func (a *article) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		a.children = append(a.children, element)
-	}
-	return a
+func Mark(attrs ...func(Element)) Element {
+	return (&tag{tag: "mark"}).addAttrs(attrs...)
 }
 
-type aside struct {
-	Element
+func Summary(attrs ...func(Element)) Element {
+	return (&tag{tag: "summary"}).addAttrs(attrs...)
 }
 
-func Aside(attrs ...func(HtmlElement)) HtmlElement {
-	f := &aside{}
-	f.tag = "aside"
-	for _, attr := range attrs {
-		attr(f)
-	}
-	return f
-}
-
-func (a *aside) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		a.children = append(a.children, element)
-	}
-	return a
-}
-
-type section struct {
-	Element
-}
-
-func Section(attrs ...func(HtmlElement)) HtmlElement {
-	ul := &section{}
-	ul.tag = "section"
-	for _, attr := range attrs {
-		attr(ul)
-	}
-	return ul
-}
-
-func (s *section) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		s.children = append(s.children, element)
-	}
-	return s
-}
-
-type nav struct {
-	Element
-}
-
-func Nav(attrs ...func(HtmlElement)) HtmlElement {
-	ul := &nav{}
-	ul.tag = "nav"
-	for _, attr := range attrs {
-		attr(ul)
-	}
-	return ul
-}
-
-func (s *nav) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		s.children = append(s.children, element)
-	}
-	return s
-}
-
-type details struct {
-	Element
-}
-
-func Details(attrs ...func(HtmlElement)) HtmlElement {
-	ul := &details{}
-	ul.tag = "details"
-	for _, attr := range attrs {
-		attr(ul)
-	}
-	return ul
-}
-
-func (s *details) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		s.children = append(s.children, element)
-	}
-	return s
-}
-
-type main struct {
-	Element
-}
-
-func Main(attrs ...func(HtmlElement)) HtmlElement {
-	ul := &main{}
-	ul.tag = "main"
-	for _, attr := range attrs {
-		attr(ul)
-	}
-	return ul
-}
-
-func (s *main) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		s.children = append(s.children, element)
-	}
-	return s
-}
-
-type mark struct {
-	Element
-}
-
-func Mark(attrs ...func(HtmlElement)) HtmlElement {
-	ul := &mark{}
-	ul.tag = "mark"
-	for _, attr := range attrs {
-		attr(ul)
-	}
-	return ul
-}
-
-func (s *mark) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		s.children = append(s.children, element)
-	}
-	return s
-}
-
-type summary struct {
-	Element
-}
-
-func Summary(attrs ...func(HtmlElement)) HtmlElement {
-	ul := &summary{}
-	ul.tag = "summary"
-	for _, attr := range attrs {
-		attr(ul)
-	}
-	return ul
-}
-
-func (s *summary) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		s.children = append(s.children, element)
-	}
-	return s
-}
-
-type time struct {
-	Element
-}
-
-func Time(attrs ...func(HtmlElement)) HtmlElement {
-	ul := &time{}
-	ul.tag = "time"
-	for _, attr := range attrs {
-		attr(ul)
-	}
-	return ul
-}
-
-func (s *time) AddElements(elements ...HtmlElement) HtmlElement {
-	for _, element := range elements {
-		s.children = append(s.children, element)
-	}
-	return s
+func Time(attrs ...func(Element)) Element {
+	return (&tag{tag: "time"}).addAttrs(attrs...)
 }
