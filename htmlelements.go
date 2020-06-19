@@ -1,6 +1,7 @@
 package html
 
 import (
+	"bytes"
 	"io"
 )
 
@@ -28,6 +29,7 @@ type tag struct {
 	level      int       // h1-h6
 	attributes []keyVal  // Attributes
 	children   []Element // Child elements
+	childData  []byte    // cached children renderings
 }
 
 func (e *tag) addAttrs(attrs ...func(Element)) Element {
@@ -160,6 +162,33 @@ func (e *tag) renderElement(w io.Writer, tag string, children []Element) (int, e
 	n += o
 	return n, err
 }
+
+// below is for optimizing the render---snip
+
+func (e *tag) fastRender(w io.Writer, tag string, children []Element) (int, error) {
+	if len(e.childData) == 0 {
+		// Record the rendering into childata.
+		buf := new(bytes.Buffer)
+		_, err := e.renderElement(buf, tag, children)
+		if err != nil {
+			return 0, err
+		}
+		e.childData = buf.Bytes()
+	}
+	n, err := w.Write(e.childData)
+	return n, err
+}
+
+func (e *tag) getRenderSize() int {
+	size := 1 // account for :space:
+	size += len(e.attributes) - 1
+	for _, el := range e.attributes {
+		size += el.getRenderSize()
+	}
+	return size
+}
+
+//---endsnip---
 
 type rawData struct {
 	content string

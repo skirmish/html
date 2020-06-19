@@ -64,9 +64,15 @@ var htmlTestCases = []HTMLTestCase{
 		element: Form(Id("formId1")),
 	},
 	{
-		name:    "form with id,name",
-		output:  "<form id=\"formId1\" name=\"somename\"/>",
-		element: Form(Id("formId1"), Name("somename")),
+		name:   "form with id,name, action, method",
+		output: "<form id=\"formId1\" name=\"somename\" action=\"/endpoint\" method=\"POST\" enctype=\"text/plain\"/>",
+		element: Form(
+			Id("formId1"),
+			Name("somename"),
+			Action("/endpoint"),
+			Method("POST"),
+			EncType("text/plain"),
+		),
 	},
 	{
 		name:    "fieldset",
@@ -148,6 +154,30 @@ var htmlTestCases = []HTMLTestCase{
 		output:  "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
 		element: Meta(Name("viewport"), ContentAttr("width=device-width, initial-scale=1.0")),
 	},
+	{
+		name:    "div",
+		output:  "<div/>",
+		element: Div(),
+	},
+	{
+		name:   "div with children",
+		output: "<div class=\"name\">some content</div>",
+		element: Div(Class("name")).AddElements(
+			Content("some content"),
+		),
+	},
+	{
+		name:    "span",
+		output:  "<span/>",
+		element: Span(),
+	},
+	{
+		name:   "span with children",
+		output: "<span class=\"name\">some content</span>",
+		element: Span(Class("name")).AddElements(
+			Content("some content"),
+		),
+	},
 }
 
 func Test_HtmlGeneration(t *testing.T) {
@@ -194,7 +224,6 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, htmlTestCases)
 	runBenchmarkCases(b, tagsTestCases)
 	runBenchmarkCases(b, headerfooterTestCases)
-	runBenchmarkCases(b, divspanTestCases)
 	runBenchmarkCases(b, mediaTestCases)
 	runBenchmarkCases(b, listTestCases)
 	runBenchmarkCases(b, tableTestCases)
@@ -203,7 +232,6 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	/*	runBenchmarkCasesFast(b,htmlTestCases)
 		runBenchmarkCasesFast(b, tagsTestCases)
 		runBenchmarkCasesFast(b, headerfooterTestCases)
-		runBenchmarkCasesFast(b, divspanTestCases)
 		runBenchmarkCasesFast(b, mediaTestCases)
 		runBenchmarkCasesFast(b, listTestCases)
 		runBenchmarkCasesFast(b, tableTestCases)
