@@ -51,3 +51,7 @@ func Source(attrs ...func(Element)) Element {
 func Link(attrs ...func(Element)) Element {
 	return (&tag{tag: "link", empty: true}).addAttrs(attrs...)
 }
+
+func Track(attrs ...func(Element)) Element {
+	return (&tag{tag: "track", empty: true}).addAttrs(attrs...)
+}

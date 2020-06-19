@@ -180,6 +180,126 @@ var tagsTestCases = []HTMLTestCase{
 		output:  "<blockquote class=\"name\">something</blockquote>",
 		element: Blockquote(Class("name")).AddElements(Content("something")),
 	},
+	{
+		name:    "em",
+		output:  "<em>content</em>",
+		element: Em().AddElements(Content("content")),
+	},
+	{
+		name:    "hr",
+		output:  "<hr>",
+		element: Hr(),
+	},
+	{
+		name:    "i",
+		output:  "<i>content</i>",
+		element: I().AddElements(Content("content")),
+	},
+	{
+		name:    "ins",
+		output:  "<ins>content</ins>",
+		element: Ins().AddElements(Content("content")),
+	},
+	{
+		name:    "kbd",
+		output:  "<kbd>content</kbd>",
+		element: Kbd().AddElements(Content("content")),
+	},
+	{
+		name:    "object and param",
+		output:  "<object><param name=\"autoplay\" value=\"true\"></object>",
+		element: Object().AddElements(Param(Name("autoplay"), Value("true"))),
+	},
+	{
+		name:    "noscript",
+		output:  "<noscript>script not enabled</noscript>",
+		element: NoScript().AddElements(Content("script not enabled")),
+	},
+	{
+		name:    "pre",
+		output:  "<pre>preformatted</pre>",
+		element: Pre().AddElements(Content("preformatted")),
+	},
+	{
+		name:    "progress",
+		output:  "<progress id=\"p1\" value=\"27\" max=\"100\">27/100</progress>",
+		element: Progress(Id("p1"), Value("27"), Max("100")).AddElements(Content("27/100")),
+	},
+	{
+		name:   "q",
+		output: "<p>content <q>short quotation</q> after quote</p>",
+		element: P().AddElements(
+			Content("content "),
+			Q().AddElements(Content("short quotation")),
+			Content(" after quote"),
+		),
+	},
+	{
+		name:   "ruby",
+		output: "<ruby>漢 <rt><rp>(</rp>ㄏㄢˋ<rp>)</rp></rt></ruby>",
+		element: Ruby().AddElements(
+			Content("漢 "),
+			Rt().AddElements(
+				Rp().AddElements(Content("(")),
+				Content("ㄏㄢˋ"),
+				Rp().AddElements(Content(")")),
+			),
+		),
+	},
+	{
+		name:    "s",
+		output:  "<s>not here</s>",
+		element: S().AddElements(Content("not here")),
+	},
+	{
+		name:    "samp",
+		output:  "<samp>example output</samp>",
+		element: Samp().AddElements(Content("example output")),
+	},
+	{
+		name:    "small",
+		output:  "<small>small text</small>",
+		element: Small().AddElements(Content("small text")),
+	},
+	{
+		name:    "strong",
+		output:  "<strong>i am strong</strong>",
+		element: Strong().AddElements(Content("i am strong")),
+	},
+	{
+		name:    "sub",
+		output:  "<sub>i am sub</sub>",
+		element: Sub().AddElements(Content("i am sub")),
+	},
+	{
+		name:    "sup",
+		output:  "<sup>i am sup</sup>",
+		element: Sup().AddElements(Content("i am sup")),
+	},
+	{
+		name:    "template",
+		output:  "<template><p>templated section</p></template>",
+		element: Template().AddElements(P().AddElements(Content("templated section"))),
+	},
+	{
+		name:    "u",
+		output:  "<u>underlined</u>",
+		element: U().AddElements(Content("underlined")),
+	},
+	{
+		name:    "var",
+		output:  "<var>x</var>",
+		element: Var().AddElements(Content("x")),
+	},
+	{
+		name:   "wbr",
+		output: "<p>word<wbr>break</p>",
+		element: P().AddElements(
+			Content("word"),
+			Wbr(),
+			Content("break"),
+		),
+	},
 }
 
 func Test_TagGeneration(t *testing.T) {

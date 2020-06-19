@@ -28,6 +28,14 @@ func Body(attrs ...func(Element)) Element {
 	return (&tag{tag: "body"}).addAttrs(attrs...)
 }
 
+func Div(attrs ...func(Element)) Element {
+	return (&tag{tag: "div"}).addAttrs(attrs...)
+}
+
+func Span(attrs ...func(Element)) Element {
+	return (&tag{tag: "span"}).addAttrs(attrs...)
+}
+
 // Content adds raw content to the stream.
 func Content(data string) Element {
 	return &rawData{content: data}

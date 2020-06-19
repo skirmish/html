@@ -37,24 +37,8 @@ Usage:
 	}
 ```
 
-Elements currently supported (absolute bare minimum):
- * doctype
- * html
- * head
- * title
- * style
- * body
- * h1-6
- * p
- * img
- * a
- * ul
- * li
- * div
- * span
- * header
- * footer
- 
+HTML5 elements are currently supported although they are mostly
+only at the bare minumum.
 
 Notes:
 This is not optimized yet, first we'll work on correctness, then once it's fairly stable then working on making it 
@@ -64,81 +48,80 @@ All valid html5 tags *want* to be implemented, but for now it's driven by the on
 
 TODO:
  * Add Validation
- * Add all valid html5 elements
  * Add Variables & Conditionals
  * Optimize
  * Test
  * Add CSS
 
-HTML Tags (* means implemented)
+HTML Tags
 ```
-*<!DOCTYPE>
-*<a>
+<!DOCTYPE>
+<a>
 <abbr>
 <address>
 <area>
-*<article>
-*<aside>
+<article>
+<aside>
 <audio>
-*<b>
+<b>
 <base>
 <bdi>
 <bdo>
-*<blockquote>
-*<body>
-*<br>
-*<button>
-*<canvas>
-*<caption>
+<blockquote>
+<body>
+<br>
+<button>
+<canvas>
+<caption>
 <cite>
 <code>
-*<col>
-*<colgroup>
+<col>
+<colgroup>
 <data>
 <datalist>
-*<dd>
+<dd>
 <del>
 <details>
 <dfn>
 <dialog>
-*<div>
-*<dl>
-*<dt>
+<div>
+<dl>
+<dt>
 <em>
 <embed>
-*<fieldset>
-*<figcaption>
-*<figure>
-*<footer>
-*<form>
-*<h1> - <h6>
-*<head>
-*<header>
+<fieldset>
+<figcaption>
+<figure>
+<footer>
+<form>
+<h1> - <h6>
+<head>
+<header>
 <hr>
-*<html>
+<html>
 <i>
 <iframe>
-*<img>
-*<input>
+<img>
+<input>
 <ins>
 <kbd>
-*<label>
+<label>
 <legend>
-*<li>
+<li>
 <link>
-*<main>
+<main>
 <map>
-*<mark>
-*<meta>
-*<meter>
-*<nav>
+<mark>
+<meta>
+<meter>
+<nav>
 <noscript>
 <object>
-*<ol>
-*<optgroup>
-*<option>
-*<output>
-*<p>
+<ol>
+<optgroup>
+<option>
+<output>
+<p>
 <param>
 <picture>
 <pre>
@@ -149,32 +132,32 @@ HTML Tags (* means implemented)
 <ruby>
 <s>
 <samp>
-*<script>
-*<section>
-*<select>
+<script>
+<section>
+<select>
 <small>
 <source>
-*<span>
+<span>
 <strong>
-*<style>
+<style>
 <sub>
-*<summary>
+<summary>
 <sup>
 <svg>
-*<table>
-*<tbody>
-*<td>
+<table>
+<tbody>
+<td>
 <template>
-*<textarea>
-*<tfoot>
-*<th>
-*<thead>
-*<time>
-*<title>
-*<tr>
+<textarea>
+<tfoot>
+<th>
+<thead>
+<time>
+<title>
+<tr>
 <track>
 <u>
-*<ul>
+<ul>
 <var>
 <video>
 <wbr>

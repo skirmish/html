@@ -24,96 +24,134 @@ var attributes []attribute = []attribute{
 
 // Name - Attribute for form
 func Name(name string) func(Element) {
-	return func(f Element) {
-		f.AddAttribute("name", name)
-	}
+	return func(f Element) { f.AddAttribute("name", name) }
+}
+
+// Target - Attribute for form, a, base
+func Target(target string) func(Element) {
+	return func(f Element) { f.AddAttribute("target", target) }
 }
 
 // Src - for image
 func Src(source string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("src", source)
-	}
+	return func(i Element) { i.AddAttribute("src", source) }
 }
 
 // Href - for image
 func Href(href string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("href", href)
-	}
+	return func(i Element) { i.AddAttribute("href", href) }
 }
 
 // UseMap - for image
 func UseMap(usemap string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("usemap", usemap)
-	}
+	return func(i Element) { i.AddAttribute("usemap", usemap) }
 }
 
 // Shape - for area
 func Shape(shape string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("shape", shape)
-	}
+	return func(i Element) { i.AddAttribute("shape", shape) }
 }
 
 // Coords - for area
 func Coords(coords string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("coords", coords)
-	}
+	return func(i Element) { i.AddAttribute("coords", coords) }
 }
 
 // Charset - for meta
 func Charset(charset string) func(Element) {
-	return func(m Element) {
-		m.AddAttribute("charset", charset)
-	}
+	return func(m Element) { m.AddAttribute("charset", charset) }
 }
 
 // SrcSet - for Source
 func SrcSet(srcset string) func(Element) {
-	return func(m Element) {
-		m.AddAttribute("srcset", srcset)
-	}
+	return func(m Element) { m.AddAttribute("srcset", srcset) }
 }
 
 // Media - for source
 func Media(media string) func(Element) {
-	return func(m Element) {
-		m.AddAttribute("media", media)
-	}
+	return func(m Element) { m.AddAttribute("media", media) }
 }
 
 // Type - script/style
 func Type(t string) func(Element) {
-	return func(m Element) {
-		m.AddAttribute("type", t)
-	}
+	return func(m Element) { m.AddAttribute("type", t) }
 }
 
 // ContentAttr - meta
 func ContentAttr(t string) func(Element) {
-	return func(m Element) {
-		m.AddAttribute("content", t)
-	}
+	return func(m Element) { m.AddAttribute("content", t) }
 }
 
-//Global Attributes
-////accesskey	Specifies a shortcut key to activate/focus an element
-////class	Specifies one or more classnames for an element (refers to a class in a style sheet)
-////contenteditable	Specifies whether the content of an element is editable or not
-////data-*	Used to store custom data private to the page or application
-////dir	Specifies the text direction for the content in an element
-////draggable	Specifies whether an element is draggable or not
-////hidden	Specifies that an element is not yet, or is no longer, relevant
-////id	Specifies a unique id for an element
-////lang	Specifies the language of the element's content
-////spellcheck	Specifies whether the element is to have its spelling and grammar checked or not
-////style	Specifies an inline CSS style for an element
-////tabindex	Specifies the tabbing order of an element
-////title	Specifies extra information about an element
-////translate	Specifies whether the content of an element should be translated or not
+// StyleAttr - all
+func StyleAttr(t string) func(Element) {
+	return func(m Element) { m.AddAttribute("style", t) }
+}
+
+// TabIndex - meta
+func TabIndex(t string) func(Element) {
+	return func(m Element) { m.AddAttribute("tabindex", t) }
+}
+
+// Action - form
+func Action(t string) func(Element) {
+	return func(m Element) { m.AddAttribute("action", t) }
+}
+
+// Method - form
+func Method(t string) func(Element) {
+	return func(m Element) { m.AddAttribute("method", t) }
+}
+
+// EncType - form
+// application/x-www-form-urlencoded
+// multipart/form-data
+// text/plain
+func EncType(t string) func(Element) {
+	return func(m Element) { m.AddAttribute("enctype", t) }
+}
+
+//HTML Global Attributes
+//The global attributes are attributes that can be used with all HTML elements.
+//
+//Attribute	Description
+//accesskey	Specifies a shortcut key to activate/focus an element
+//class	Specifies one or more classnames for an element (refers to a class in a style sheet)
+//contenteditable	Specifies whether the content of an element is editable or not
+//data-*	Used to store custom data private to the page or application
+//dir	Specifies the text direction for the content in an element
+//draggable	Specifies whether an element is draggable or not
+//hidden	Specifies that an element is not yet, or is no longer, relevant
+//id	Specifies a unique id for an element
+//lang	Specifies the language of the element's content
+//spellcheck	Specifies whether the element is to have its spelling and grammar checked or not
+//style	Specifies an inline CSS style for an element
+//tabindex	Specifies the tabbing order of an element
+//title	Specifies extra information about an element
+//translate	Specifies whether the content of an element should be translated or not
+
+func AccessKey(accesskey string) func(e Element) {
+	return func(e Element) { e.AddAttribute("accesskey", accesskey) }
+}
+
+func Class(class string) func(e Element) {
+	return func(e Element) { e.AddAttribute("class", class) }
+}
+
+func Hidden(hidden string) func(e Element) {
+	return func(e Element) { e.AddAttribute("hidden", hidden) }
+}
+
+func Id(id string) func(element Element) {
+	return func(element Element) { element.AddAttribute("id", id) }
+}
+
+func Lang(lang string) func(element Element) {
+	return func(element Element) { element.AddAttribute("lang", lang) }
+}
+
+func TitleAttr(title string) func(element Element) {
+	return func(element Element) { element.AddAttribute("title", title) }
+}
 
 //Form attributes
 //Attribute	Value	Description
@@ -159,65 +197,62 @@ onsubmit	script	Fires when a form is submitted*/
 
 // FormId - meter
 func FormId(formid string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("form", formid)
-	}
+	return func(i Element) { i.AddAttribute("form", formid) }
 }
 
 // High - meter
 func High(high string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("high", high)
-	}
+	return func(i Element) { i.AddAttribute("high", high) }
 }
 
 // Low - meter
 func Low(low string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("low", low)
-	}
+	return func(i Element) { i.AddAttribute("low", low) }
 }
 
 // Max - meter
 func Max(max string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("max", max)
-	}
+	return func(i Element) { i.AddAttribute("max", max) }
 }
 
 // Min - meter
 func Min(min string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("min", min)
-	}
+	return func(i Element) { i.AddAttribute("min", min) }
 }
 
 // Optimum - meter
 func Optimum(optimum string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("optimum", optimum)
-	}
+	return func(i Element) { i.AddAttribute("optimum", optimum) }
 }
 
 // Value - meter
 func Value(value string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("value", value)
-	}
+	return func(i Element) { i.AddAttribute("value", value) }
 }
 
 // Dir - bdo
 func Dir(dir string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("dir", dir)
-	}
+	return func(i Element) { i.AddAttribute("dir", dir) }
 }
 
 // Rel - bdo
 func Rel(dir string) func(Element) {
-	return func(i Element) {
-		i.AddAttribute("rel", dir)
-	}
+	return func(i Element) { i.AddAttribute("rel", dir) }
+}
+
+// Kind - track
+func Kind(dir string) func(Element) {
+	return func(i Element) { i.AddAttribute("kind", dir) }
+}
+
+// SrcLang - track
+func SrcLang(dir string) func(Element) {
+	return func(i Element) { i.AddAttribute("srclang", dir) }
+}
+
+// LabelAttr - track
+func LabelAttr(dir string) func(Element) {
+	return func(i Element) { i.AddAttribute("label", dir) }
 }
 
 /* Meter Attributes
