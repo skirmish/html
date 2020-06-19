@@ -1,4 +1,4 @@
-module github.com/skirmish/html.git
+module github.com/skirmish/html
 
 go 1.14
 
