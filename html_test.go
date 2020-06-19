@@ -191,6 +191,24 @@ func Test_HtmlGeneration(t *testing.T) {
 	}
 }
 
+func Test_HtmlFastGeneration(t *testing.T) {
+	for _, testCase := range htmlTestCases {
+		t.Logf("Test %s", testCase.name)
+
+		buf1 := new(bytes.Buffer)
+		_, err := testCase.element.Render(buf1)
+		assert.NoError(t, err, "Rendering")
+		assert.Equal(t, testCase.output, buf1.String(), "first rendering doesn't match expected output")
+
+		buf2 := new(bytes.Buffer)
+		if fr, ok := testCase.element.(*tag); ok == true {
+			_, err = fr.fastRender(buf2, fr.tag, fr.children)
+			assert.NoError(t, err, "Rendering2")
+			assert.Equal(t, testCase.output, buf2.String(), "second rendering doesn't match expected output")
+		}
+	}
+}
+
 func runBenchmarkCases(b *testing.B, cases []HTMLTestCase) {
 	for _, benchCase := range cases {
 		b.Run(benchCase.name, func(b *testing.B) {
@@ -205,21 +223,24 @@ func runBenchmarkCases(b *testing.B, cases []HTMLTestCase) {
 	}
 }
 
-/*
 func runBenchmarkCasesFast(b *testing.B, cases []HTMLTestCase) {
 	for _, benchCase := range cases {
-		b.Run(benchCase.name + "-fast", func(b *testing.B) {
+		b.Run(benchCase.name+"-fast", func(b *testing.B) {
 			b.ReportAllocs()
 			for i := 0; i < b.N; i++ {
 				buf := new(bytes.Buffer)
-				n, _ := benchCase.element.FastRender(buf)
+				n := 0
+				if fr, ok := benchCase.element.(*tag); ok == true {
+					//n, _ := benchCase.element.fastRender(buf)
+					n, _ = fr.fastRender(buf, fr.tag, fr.children)
+				}
 				b.ReportMetric(float64(n), "bytes")
 				b.SetBytes(int64(n))
 			}
 		})
 	}
 }
-*/
+
 func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, htmlTestCases)
 	runBenchmarkCases(b, tagsTestCases)
@@ -229,12 +250,12 @@ func BenchmarkHtmlGeneration(b *testing.B) {
 	runBenchmarkCases(b, tableTestCases)
 	runBenchmarkCases(b, kitchenSinkTestCases)
 
-	/*	runBenchmarkCasesFast(b,htmlTestCases)
-		runBenchmarkCasesFast(b, tagsTestCases)
-		runBenchmarkCasesFast(b, headerfooterTestCases)
-		runBenchmarkCasesFast(b, mediaTestCases)
-		runBenchmarkCasesFast(b, listTestCases)
-		runBenchmarkCasesFast(b, tableTestCases)
-		runBenchmarkCasesFast(b, kitchenSinkTestCases)
-	*/
+	//runBenchmarkCasesFast(b, htmlTestCases)
+	//runBenchmarkCasesFast(b, tagsTestCases)
+	//runBenchmarkCasesFast(b, headerfooterTestCases)
+	//runBenchmarkCasesFast(b, mediaTestCases)
+	//runBenchmarkCasesFast(b, listTestCases)
+	//runBenchmarkCasesFast(b, tableTestCases)
+	runBenchmarkCasesFast(b, kitchenSinkTestCases)
+
 }
