@@ -12,7 +12,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/skirmish/html.git"
+	"github.com/skirmish/html"
 )
 
 func main() {
